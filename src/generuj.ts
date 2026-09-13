@@ -149,6 +149,7 @@ function slozka(cesta: string): void {
 }
 
 const kostra = sablona('layout');
+const cimburk = readFileSync(join(koren, 'sablony', 'cimburk.svg'), 'utf8').trim();
 
 for (const stranka of stranky) {
   const obsah = sablona(stranka.sablona).replaceAll('{{zaklad}}', stranka.zaklad);
@@ -162,6 +163,7 @@ for (const stranka of stranky) {
     .replaceAll('{{navigace-paticka}}', odkazy)
     .replaceAll('{{navigace}}', odkazy)
     .replaceAll('{{obsah}}', obsah)
+    .replaceAll('{{cimburk}}', cimburk)
     .replaceAll('{{email}}', kontakt.email)
     .replaceAll('{{telefon}}', kontakt.telefon)
     .replaceAll('{{telefon-odkaz}}', kontakt.telefonOdkaz)
