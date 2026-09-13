@@ -1,3 +1,99 @@
+# ═══════════════════════════════════════════════════════════════════
+#  OKNO POD HVĚZDAMI — co zbývá dořešit
+# ═══════════════════════════════════════════════════════════════════
+#
+# ── 1. LOGO — dvě věci k opravě ─────────────────────────────────────
+#
+#   a) V logu chybí háček: je tam "OKNO POD HVEZDAMI", má být
+#      "HVĚZDAMI". Na brand boardu (podklady/barvova typologie.PNG)
+#      háček je, v logu (podklady/logo.jpg) není — takže jedno z toho
+#      je špatně. Pokud je "HVEZDAMI" schválně (stylizace, bezpatkové
+#      verzálky bez diakritiky), je potřeba to potvrdit, protože český
+#      zákazník to přečte jako překlep.
+#
+#   b) V okně je jedna hvězda, ale jmenuje se to "pod hvězdami" —
+#      množné číslo. Dvě tři hvězdy různé velikosti by seděly líp
+#      a v tom malém okně by pořád byl klid.
+#
+#   Dokud se logo neopraví, používá web jen text (Playfair Display),
+#   obrázek loga je zatím jen jako favicon a OG náhled.
+#
+# ── 2. CO POTŘEBUJEME OD PANÍ DOPLNIT ───────────────────────────────
+#
+#   Na webu jsou tahle místa označená cihlovou barvou s přerušovaným
+#   podtržením, v šablonách je najdeš podle class="doplnit".
+#
+#   DŮM
+#     - počet lůžek a kolik lidí se v domě vyspí
+#     - dispozice (např. 4+1 na dvou podlažích)
+#     - výměra zahrady
+#     - projít seznam vybavení a škrtnout, co dům nemá
+#       (teď tam je: krb, myčka, pračka, Wi-Fi, TV, dětský koutek,
+#        postýlka, terasa, ohniště, gril, parkování, úschova kol)
+#
+#   CENÍK
+#     - cena za noc v hlavní sezóně
+#     - cena za noc mimo sezónu
+#     - cena za noc o Vánocích a Silvestru
+#     - závěrečný úklid za pobyt
+#     - poplatek za psa
+#     - poplatek obci za osobu a noc
+#     - minimální počet nocí
+#     - výše zálohy a do kdy je splatná
+#     - storno podmínky
+#
+#   KONTAKT A ÚŘEDNÍ ÚDAJE
+#     - telefon
+#     - e-mail
+#     - ulice a číslo popisné (PSČ 569 41 Městečko Trnávka už tam je)
+#     - GPS souřadnice
+#     - jméno provozovatele
+#     - IČO
+#
+#   PROVOZ
+#     - od kolika je příjezd a do kolika odjezd
+#     - podmínky pro psy (kolik psů, kam nesmí, poplatek)
+#     - jak dlouho trvá cesta autem z Brna a z Pardubic
+#     - název nejbližší vlakové zastávky
+#
+#   OKOLÍ
+#     - vzdálenosti k výletům v km (hrad Cimburk, Moravská Třebová,
+#       Jevíčko už na webu jsou, chybí čísla)
+#     - oblíbené místo hostů na koupání nebo procházku
+#
+# ── 3. JAKÉ FOTKY POTŘEBUJEME ───────────────────────────────────────
+#
+#   Podrobněji i s názvy souborů je to v FOTKY.md. Stručně:
+#
+#   NUTNÉ
+#     - hero: jedna hlavní fotka na šířku (dům, výhled nebo terasa
+#       navečer), aspoň 2400 px široká — je přes celou úvodní obrazovku
+#     - dům zvenku, na výšku
+#     - obývací pokoj s krbem
+#     - kuchyně a jídelna s prostřeným stolem
+#     - ložnice (každou zvlášť, ať je vidět, kolik se jich vyspí)
+#     - koupelna
+#     - dětský koutek
+#     - terasa s posezením
+#     - zahrada a ohniště
+#
+#   DOBRÉ MÍT
+#     - okolí a hrad Cimburk
+#     - detaily, které dům prodávají: prostřená snídaně, deka u krbu,
+#       ručníky, kytka na stole
+#     - večerní fotka s rozsvícenou terasou nebo oblohou
+#       (kvůli názvu — "okno pod hvězdami" je potřeba jednou ukázat)
+#     - fotka hostitelů na stránku Kontakt, ať je vidět, kdo dům
+#       pronajímá
+#
+#   JAK JE POSLAT
+#     - na šířku, ne na výšku z telefonu — web je skládá do širokých
+#       ploch
+#     - bez filtrů, za denního světla, uklizené
+#     - v plné velikosti, zmenšíme je sami
+#
+# ═══════════════════════════════════════════════════════════════════
+
 node_modules/
 .DS_Store
 .build/
