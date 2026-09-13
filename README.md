@@ -74,3 +74,5 @@ Na stránkách jsou místa označená cihlovou barvou s přerušovaným podtrže
 to jsou údaje k doplnění: kapacita a dispozice, ceník, adresa a GPS, telefon,
 e-mail, IČO a jméno provozovatele, časy příjezdu, podmínky pro psy, storno
 a vzdálenosti k výletům. V šablonách je najdeš podle `class="doplnit"`.
+
+Logo je potřeba upravit, to co jsme dostali má typografické a gramatické chybyy (chybějící háček a pod zvědzdami v logu je jen jedna hvězda). 
