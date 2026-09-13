@@ -1,0 +1,4 @@
+# Web se ještě dokončuje — obsahuje nedoplněné údaje.
+# Až bude hotový, smazat tenhle soubor i meta robots v sablony/layout.html.
+User-agent: *
+Disallow: /
