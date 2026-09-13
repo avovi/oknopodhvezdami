@@ -27,4 +27,8 @@ Sytost se ladí proměnnou `--kryti` v `styles.css`, pod 0,8 už text začne pla
 
 Popisky v galerii se mění v šablonách u jednotlivých položek (`data-popis` a `alt`).
 
-Fotky před nahráním zmenši — na web stačí šířka do 2000 px a kvalita JPEG 80.
+Majitelka fotky nahrává na Google Disk do sdílené složky a názvy řešit nemusí —
+přejmenujeme si je sami podle tabulky výš.
+
+Fotky před nasazením zmenši — na web stačí šířka do 2000 px a kvalita JPEG 80,
+u hlavní fotky 2400 px.

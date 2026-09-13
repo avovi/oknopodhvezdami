@@ -63,40 +63,40 @@
 #
 # ── 3. JAKÉ FOTKY POTŘEBUJEME ───────────────────────────────────────
 #
-#   Podrobněji i s názvy souborů je to v FOTKY.md. Stručně:
+#   Nahrát se dají na Google Disk, do sdílené složky. Názvy souborů
+#   řešit nemusí, přejmenujeme si je sami (viz FOTKY.md).
 #
 #   NUTNÉ
-#     - hero: jedna hlavní fotka na šířku (dům, výhled nebo terasa
-#       navečer), aspoň 2400 px široká — je přes celou úvodní obrazovku
-#     - dům zvenku, na výšku
-#     - obývací pokoj s krbem
+#     - hlavní fotka na šířku přes celou úvodní obrazovku, aspoň
+#       2400 px široká — dům, výhled nebo terasa navečer
+#     - dům zvenku
+#     - obývací pokoj (a krb, pokud v domě je)
 #     - kuchyně a jídelna s prostřeným stolem
-#     - ložnice (každou zvlášť, ať je vidět, kolik se jich vyspí)
+#     - ložnice — každou zvlášť, ať je vidět, kolik se jich vyspí
 #     - koupelna
-#     - dětský koutek
 #     - terasa s posezením
-#     - zahrada a ohniště
+#     - zahrada, a ohniště pokud je
+#     - dětský koutek, pokud v domě je
 #
 #   OKOLÍ NA POZADÍ SEKCÍ (aspoň tři, klidně šest)
-#     - krajina kolem domu, louky, les, pole, hrad Cimburk v dálce
+#     - krajina kolem domu, louky, les, pole, cesta, hrad Cimburk
+#       v dálce, mlha nad polem, stromy proti obloze
 #     - fotky leží pod barevnou plochou, která je z velké části
 #       zakryje — musí fungovat jako nálada, ne jako informace,
 #       takže žádné detaily, nápisy ani drobná kresba
-#     - hodí se i fotky, na kterých by jinak nebylo nic zajímavého:
-#       mlha nad polem, stromy proti obloze, cesta
+#     - nevadí, když na fotce "nic není", právě takové jsou nejlepší
 #     - čím víc jich bude, tím míň se web bude opakovat
 #
 #   DOBRÉ MÍT
-#     - další dvě fotky do úvodní obrazovky (hero-2, hero-3),
-#       která je po chvíli prostřídá — ideálně stejné místo
-#       v jinou denní dobu nebo roční období
-#     - okolí a hrad Cimburk zblízka do galerie
-#     - detaily, které dům prodávají: prostřená snídaně, deka u krbu,
-#       ručníky, kytka na stole
-#     - večerní fotka s rozsvícenou terasou nebo oblohou
-#       (kvůli názvu — "okno pod hvězdami" je potřeba jednou ukázat)
-#     - fotka hostitelů na stránku Kontakt, ať je vidět, kdo dům
-#       pronajímá
+#     - další dvě fotky do úvodní obrazovky, která je po sedmi
+#       vteřinách prostřídá — ideálně stejné místo v jinou denní
+#       dobu nebo roční období
+#     - hrad Cimburk zblízka do galerie
+#     - detaily, které dům prodávají: prostřená snídaně, ručníky,
+#       kytka na stole, deka přes křeslo
+#     - večerní fotka s rozsvícenou terasou nebo oblohou — název je
+#       potřeba někde na webu ukázat
+#     - fotka hostitelů na stránku Kontakt
 #
 #   JAK JE POSLAT
 #     - na šířku, ne na výšku z telefonu — web je skládá do širokých
