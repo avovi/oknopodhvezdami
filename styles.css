@@ -243,14 +243,8 @@ a { color: inherit; }
 .sekce { padding: clamp(4.5rem, 9vw, 7.5rem) 0; }
 .sekce-svetla { background: var(--bezova-svetla); }
 .sekce-salvej { background: var(--salvej); color: var(--bila); }
-.sekce-salvej .nadhodnoceni { color: rgba(255, 255, 255, 0.85); }
 .sekce-cihla { background: var(--cihla); color: var(--bila); }
-.sekce-cihla .nadhodnoceni { color: rgba(255, 255, 255, 0.85); }
 
-.nadhodnoceni {
-  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--cihla); margin-bottom: 0.9rem;
-}
 .podnadpis { margin-top: 3.5rem; }
 
 .dvousloupec {
@@ -304,7 +298,6 @@ a { color: inherit; }
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   text-align: center; margin: 3.5rem 0 0;
 }
-.citat-vlevo { text-align: left; margin-top: 2rem; }
 
 /* ---------- motivace ---------- */
 
@@ -417,13 +410,6 @@ details p { margin: 0.7rem 0 0; font-size: 0.92rem; color: var(--text-tlumeny); 
 }
 .paticka nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .paticka-claim { font-family: var(--akcent-font); font-size: 1.4rem; margin: 0; }
-.paticka-ikony {
-  display: flex; justify-content: center; gap: clamp(1rem, 5vw, 4rem);
-  flex-wrap: wrap;
-  margin-top: 2.5rem; padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-}
-.paticka-ikony span { font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase; }
 .copy { text-align: center; font-size: 0.72rem; letter-spacing: 0.1em; margin: 2rem 0 0; opacity: 0.85; }
 
 /* ---------- lupa ---------- */
@@ -574,3 +560,18 @@ code {
 @media (prefers-reduced-motion: reduce) {
   .hero-foto img + img { display: none; }
 }
+
+/* ---------- místa, kde chybí text od majitelky ---------- */
+
+.doplnit-blok {
+  display: block;
+  padding: 1rem 1.2rem;
+  font-style: italic;
+}
+.poznamka-vyrazna {
+  margin: 0 0 1rem;
+  color: var(--cihla-tmava);
+  border-left: 2px solid var(--cihla);
+  padding-left: 0.9rem;
+}
+.vybaveni-navrh li { opacity: 0.75; }
