@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{titulek}}</title>
+<meta name="description" content="{{popis}}">
+<meta property="og:title" content="{{titulek}}">
+<meta property="og:description" content="{{popis}}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{zaklad}}img/logo.jpg">
+<meta property="og:locale" content="cs_CZ">
+<link rel="icon" href="{{zaklad}}img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{zaklad}}styles.css">
+</head>
+<body class="{{telo}}">
+
+<a class="preskocit" href="#obsah">Přeskočit na obsah</a>
+
+<header class="hlavicka {{hlavicka}}" id="hlavicka">
+  <div class="obal hlavicka-obsah">
+    <a class="znacka" href="{{zaklad}}">
+      <span class="znacka-nazev">Okno pod hvězdami</span>
+      <span class="znacka-podtitul">prázdninový dům</span>
+    </a>
+    <button class="menu-tlacitko" aria-expanded="false" aria-controls="navigace">
+      <span class="menu-carky" aria-hidden="true"></span>
+      <span class="skryte">Menu</span>
+    </button>
+    <nav id="navigace" class="navigace" aria-label="Hlavní navigace">
+      {{navigace}}
+    </nav>
+  </div>
+</header>
+
+<main id="obsah">
+{{obsah}}
+</main>
+
+<footer class="paticka">
+  <div class="obal paticka-obsah">
+    <div class="paticka-znacka">
+      <p class="znacka-nazev">Okno pod hvězdami</p>
+      <p class="znacka-podtitul">prázdninový dům</p>
+    </div>
+    <nav aria-label="Patička">
+      {{navigace-paticka}}
+    </nav>
+    <p class="paticka-claim">Váš druhý domov pro společné chvíle.</p>
+  </div>
+  <div class="obal paticka-ikony">
+    <span>Příroda</span><span>Rodina</span><span>Klid</span><span>Komfort</span><span>Hvězdy</span>
+  </div>
+  <p class="copy">
+    © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>
+    Provozovatel <span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span>
+  </p>
+</footer>
+
+<div class="lupa" id="lupa" hidden>
+  <button class="lupa-zavrit" aria-label="Zavřít">×</button>
+  <button class="lupa-sip lupa-predchozi" aria-label="Předchozí">‹</button>
+  <img id="lupa-foto" alt="">
+  <button class="lupa-sip lupa-dalsi" aria-label="Další">›</button>
+  <p class="lupa-popis" id="lupa-popis"></p>
+</div>
+
+<script src="{{zaklad}}script.js"></script>
+</body>
+</html>

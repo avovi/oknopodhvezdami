@@ -1,0 +1,83 @@
+  <section class="hlava-stranky">
+    <div class="obal">
+      <p class="nadhodnoceni">Rezervace</p>
+      <h1>Jak si u nás zamluvit termín</h1>
+      <p class="hlava-perex">
+        Žádný rezervační systém ani poplatky navíc. Napíšete nám, my se ozveme.
+      </p>
+    </div>
+  </section>
+
+  <section class="sekce">
+    <div class="obal">
+      <ol class="kroky">
+        <li><strong>Napíšete nám</strong><br>Formulářem níže, e-mailem nebo telefonem. Stačí termín a kolik vás bude.</li>
+        <li><strong>Ozveme se do 24 hodin</strong><br>Potvrdíme volno a pošleme přesnou cenu včetně poplatků.</li>
+        <li><strong>Rezervace platí po záloze</strong><br><span class="doplnit">doplnit výši zálohy a splatnost</span>. Zbytek doplatíte při příjezdu.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sekce sekce-cihla">
+    <div class="obal">
+      <h2>Poptávka pobytu</h2>
+      <form class="formular" id="formular">
+        <div class="pole">
+          <label for="jmeno">Jméno a příjmení</label>
+          <input id="jmeno" name="jmeno" type="text" required autocomplete="name">
+        </div>
+        <div class="pole">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="pole">
+          <label for="telefon">Telefon</label>
+          <input id="telefon" name="telefon" type="tel" autocomplete="tel">
+        </div>
+        <div class="pole">
+          <label for="osob">Počet osob</label>
+          <input id="osob" name="osob" type="number" min="1" max="20" value="4">
+        </div>
+        <div class="pole">
+          <label for="prijezd">Příjezd</label>
+          <input id="prijezd" name="prijezd" type="date">
+        </div>
+        <div class="pole">
+          <label for="odjezd">Odjezd</label>
+          <input id="odjezd" name="odjezd" type="date">
+        </div>
+        <div class="pole pole-siroke">
+          <label for="zprava">Zpráva</label>
+          <textarea id="zprava" name="zprava" rows="4" placeholder="Jedeme s malými dětmi a psem, potřebovali bychom postýlku…"></textarea>
+        </div>
+        <div class="pole pole-siroke formular-paticka">
+          <button class="tlacitko tlacitko-svetle" type="submit">Odeslat poptávku</button>
+          <p class="poznamka">Formulář otevře váš e-mailový program s předvyplněnou zprávou. Nic neposíláme na cizí server.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="sekce">
+    <div class="obal">
+      <h2>Co je dobré vědět předem</h2>
+      <div class="panely">
+        <article class="panel">
+          <h3>Délka pobytu</h3>
+          <p>Minimálně <span class="doplnit">doplnit</span> nocí. V hlavní sezóně pronajímáme od soboty do soboty.</p>
+        </article>
+        <article class="panel">
+          <h3>Co je v ceně</h3>
+          <p>Povlečení, ručníky, energie a parkování u domu. Závěrečný úklid a poplatek obci se počítají zvlášť — viz <a href="{{zaklad}}pro-hosty/">ceník</a>.</p>
+        </article>
+        <article class="panel">
+          <h3>Storno</h3>
+          <p><span class="doplnit">doplnit storno podmínky</span></p>
+        </article>
+        <article class="panel">
+          <h3>Předání klíčů</h3>
+          <p>Přesnou cestu a předání klíčů domluvíme pár dní před příjezdem. Příjezd od <span class="doplnit">00:00</span>, odjezd do <span class="doplnit">00:00</span>.</p>
+        </article>
+      </div>
+    </div>
+  </section>

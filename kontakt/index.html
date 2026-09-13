@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt – Okno pod hvězdami</title>
+<meta name="description" content="Telefon, e-mail a adresa prázdninového domu Okno pod hvězdami v Městečku Trnávka.">
+<meta property="og:title" content="Kontakt – Okno pod hvězdami">
+<meta property="og:description" content="Telefon, e-mail a adresa prázdninového domu Okno pod hvězdami v Městečku Trnávka.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../img/logo.jpg">
+<meta property="og:locale" content="cs_CZ">
+<link rel="icon" href="../img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body class="podstranka">
+
+<a class="preskocit" href="#obsah">Přeskočit na obsah</a>
+
+<header class="hlavicka prilepena" id="hlavicka">
+  <div class="obal hlavicka-obsah">
+    <a class="znacka" href="../">
+      <span class="znacka-nazev">Okno pod hvězdami</span>
+      <span class="znacka-podtitul">prázdninový dům</span>
+    </a>
+    <button class="menu-tlacitko" aria-expanded="false" aria-controls="navigace">
+      <span class="menu-carky" aria-hidden="true"></span>
+      <span class="skryte">Menu</span>
+    </button>
+    <nav id="navigace" class="navigace" aria-label="Hlavní navigace">
+      <a href="../dum/">Dům</a>
+      <a href="../galerie/">Galerie</a>
+      <a href="../rezervace/">Rezervace</a>
+      <a href="../pro-hosty/">Pro hosty</a>
+      <a href="../kontakt/" class="aktivni" aria-current="page">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="obsah">
+  <section class="hlava-stranky">
+    <div class="obal">
+      <p class="nadhodnoceni">Kontakt</p>
+      <h1>Ozvěte se nám</h1>
+      <p class="hlava-perex">
+        Na dotazy odpovídáme sami, žádná recepce ani call centrum.
+        Když si nebudete něčím jistí, zavolejte — je to nejrychlejší.
+      </p>
+    </div>
+  </section>
+
+  <section class="sekce">
+    <div class="obal kontakt-obsah">
+      <div>
+        <ul class="kontakty">
+          <li><span>Telefon</span><a href="tel:+420000000000" class="doplnit">+420 000 000 000</a></li>
+          <li><span>E-mail</span><a href="mailto:info@example.cz" class="doplnit">doplnit@e-mail.cz</a></li>
+          <li><span>Adresa</span><span><span class="doplnit">doplnit ulici</span>, 569 41 Městečko Trnávka</span></li>
+          <li><span>Provozovatel</span><span><span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span></span></li>
+        </ul>
+        <p class="citat citat-vlevo">Děti jsou u nás vítány</p>
+        <p><a class="tlacitko" href="../rezervace/">Chci poptat termín</a></p>
+      </div>
+      <span class="foto-oblouk" data-popis="Hostitelé nebo dům zvenku"><img src="../img/kontakt.jpg" alt="" loading="lazy"></span>
+    </div>
+  </section>
+
+</main>
+
+<footer class="paticka">
+  <div class="obal paticka-obsah">
+    <div class="paticka-znacka">
+      <p class="znacka-nazev">Okno pod hvězdami</p>
+      <p class="znacka-podtitul">prázdninový dům</p>
+    </div>
+    <nav aria-label="Patička">
+      <a href="../dum/">Dům</a>
+      <a href="../galerie/">Galerie</a>
+      <a href="../rezervace/">Rezervace</a>
+      <a href="../pro-hosty/">Pro hosty</a>
+      <a href="../kontakt/" class="aktivni" aria-current="page">Kontakt</a>
+    </nav>
+    <p class="paticka-claim">Váš druhý domov pro společné chvíle.</p>
+  </div>
+  <div class="obal paticka-ikony">
+    <span>Příroda</span><span>Rodina</span><span>Klid</span><span>Komfort</span><span>Hvězdy</span>
+  </div>
+  <p class="copy">
+    © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>
+    Provozovatel <span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span>
+  </p>
+</footer>
+
+<div class="lupa" id="lupa" hidden>
+  <button class="lupa-zavrit" aria-label="Zavřít">×</button>
+  <button class="lupa-sip lupa-predchozi" aria-label="Předchozí">‹</button>
+  <img id="lupa-foto" alt="">
+  <button class="lupa-sip lupa-dalsi" aria-label="Další">›</button>
+  <p class="lupa-popis" id="lupa-popis"></p>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>

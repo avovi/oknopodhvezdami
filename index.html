@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Okno pod hvězdami – prázdninový dům v Městečku Trnávka</title>
+<meta name="description" content="Celý prázdninový dům jen pro vás v Městečku Trnávka. Příroda, klid a společné chvíle — krb, terasa, dětský koutek a hvězdná obloha. Pejsci vítáni.">
+<meta property="og:title" content="Okno pod hvězdami – prázdninový dům v Městečku Trnávka">
+<meta property="og:description" content="Celý prázdninový dům jen pro vás v Městečku Trnávka. Příroda, klid a společné chvíle — krb, terasa, dětský koutek a hvězdná obloha. Pejsci vítáni.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/logo.jpg">
+<meta property="og:locale" content="cs_CZ">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body class="domu">
+
+<a class="preskocit" href="#obsah">Přeskočit na obsah</a>
+
+<header class="hlavicka " id="hlavicka">
+  <div class="obal hlavicka-obsah">
+    <a class="znacka" href="">
+      <span class="znacka-nazev">Okno pod hvězdami</span>
+      <span class="znacka-podtitul">prázdninový dům</span>
+    </a>
+    <button class="menu-tlacitko" aria-expanded="false" aria-controls="navigace">
+      <span class="menu-carky" aria-hidden="true"></span>
+      <span class="skryte">Menu</span>
+    </button>
+    <nav id="navigace" class="navigace" aria-label="Hlavní navigace">
+      <a href="dum/">Dům</a>
+      <a href="galerie/">Galerie</a>
+      <a href="rezervace/">Rezervace</a>
+      <a href="pro-hosty/">Pro hosty</a>
+      <a href="kontakt/">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="obsah">
+  <section class="hero">
+    <div class="hero-foto" data-popis="Hlavní fotka domu nebo výhledu">
+      <img src="img/hero.jpg" alt="">
+    </div>
+    <div class="obal hero-obsah">
+      <span class="hero-znak" aria-hidden="true">
+        <svg viewBox="0 0 120 150" role="presentation">
+          <path d="M12 145 V62 A48 48 0 0 1 108 62 V145" fill="none" stroke="currentColor" stroke-width="2.4"/>
+          <path d="M12 145 H108" fill="none" stroke="currentColor" stroke-width="2.4"/>
+          <path d="M16 122 C40 92 58 92 74 118 C86 96 102 94 106 108" fill="none" stroke="currentColor" stroke-width="1.8"/>
+          <path d="M80 44 L83 58 L97 61 L83 64 L80 78 L77 64 L63 61 L77 58 Z" fill="currentColor"/>
+        </svg>
+      </span>
+      <h1>Okno pod hvězdami</h1>
+      <p class="hero-podtitul">prázdninový dům</p>
+      <p class="hero-claim">Příroda. Klid. Společné chvíle.</p>
+      <div class="hero-tlacitka">
+        <a class="tlacitko" href="rezervace/">Nezávazně poptat termín</a>
+        <a class="tlacitko tlacitko-lehke" href="dum/">Prohlédnout dům</a>
+      </div>
+      <p class="hero-misto">Městečko Trnávka, Pardubický kraj</p>
+    </div>
+  </section>
+
+  <section class="pasek" aria-label="Co u nás najdete">
+    <div class="obal pasek-obsah">
+      <span><em aria-hidden="true">✦</em>Hvězdná obloha</span>
+      <span><em aria-hidden="true">❦</em>Příroda okolo</span>
+      <span><em aria-hidden="true">⌂</em>Krb na večery</span>
+      <span><em aria-hidden="true">✿</em>Pejsci vítáni</span>
+      <span><em aria-hidden="true">≈</em>Relax bez shonu</span>
+    </div>
+  </section>
+
+  <section class="rozcestnik" aria-label="Rozcestník">
+    <div class="obal karty">
+      <a class="karta" href="dum/">
+        <span class="karta-foto" data-popis="Obývací pokoj s krbem"><img src="img/karta-dum.jpg" alt="" loading="lazy"></span>
+        <h2>Co nabízíme</h2>
+        <p>Dispozice, vybavení a fotogalerie celého domu i zahrady.</p>
+        <span class="karta-odkaz">Podívat se</span>
+      </a>
+      <a class="karta" href="rezervace/">
+        <span class="karta-foto" data-popis="Ložnice"><img src="img/karta-rezervace.jpg" alt="" loading="lazy"></span>
+        <h2>Rezervace</h2>
+        <p>Jak probíhá domluva termínu, co je v ceně a jak si zamluvit pobyt.</p>
+        <span class="karta-odkaz">Poptat termín</span>
+      </a>
+      <a class="karta" href="pro-hosty/">
+        <span class="karta-foto" data-popis="Terasa"><img src="img/karta-hoste.jpg" alt="" loading="lazy"></span>
+        <h2>Informace pro naše hosty</h2>
+        <p>Ceník, kudy k nám, tipy na výlety v okolí a odpovědi na časté otázky.</p>
+        <span class="karta-odkaz">Přečíst si</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="sekce sekce-salvej">
+    <div class="obal">
+      <p class="nadhodnoceni">Pro koho je prázdninový dům</p>
+      <h2>Sedne vám, pokud hledáte klid</h2>
+      <div class="trojice">
+        <article>
+          <h3>Rodiny s dětmi</h3>
+          <p>Bezpečný prostor pro malé i velké. Zahrada bez aut, koutek na hraní a postýlka pro nejmenší.</p>
+        </article>
+        <article>
+          <h3>Cyklisté</h3>
+          <p>Trasy začínají za brankou. Kola zamknete v suchu a večer si dáte nohy nahoru.</p>
+        </article>
+        <article>
+          <h3>Přátelé</h3>
+          <p>Společné zážitky a víc času pro sebe. Velký stůl, krb a oheň na zahradě až do noci.</p>
+        </article>
+      </div>
+      <p class="citat">Příroda je náš největší luxus.</p>
+    </div>
+  </section>
+
+  <section class="sekce motivace">
+    <div class="obal motivace-obsah">
+      <div>
+        <p class="nadhodnoceni">Proč právě sem</p>
+        <h2>Dovolená, kterou si budete pamatovat déle než fotky</h2>
+        <p>
+          Nejhezčí na tomhle domě není vybavení, ale ticho. Děti si najdou svoje místo na zahradě,
+          dospělí svoje na terase a večer se všichni sejdou u ohně. Nikam se nespěchá,
+          protože nikdo jiný tu na nic nečeká.
+        </p>
+        <p>
+          A až se setmí, zhasněte světla na terase. Uvidíte, proč se dům jmenuje tak, jak se jmenuje.
+        </p>
+        <a class="tlacitko" href="rezervace/">Chci se podívat na termíny</a>
+      </div>
+      <span class="foto-oblouk foto-oblouk-vysoky" data-popis="Večer na terase"><img src="img/motivace.jpg" alt="" loading="lazy"></span>
+    </div>
+  </section>
+
+  <section class="sekce sekce-svetla">
+    <div class="obal">
+      <p class="nadhodnoceni">Fotogalerie</p>
+      <h2>Nakoukněte dovnitř</h2>
+      <div class="galerie galerie-ukazka">
+        <span class="polozka polozka-nahled" data-popis="Obývací pokoj s krbem"><img src="img/galerie/01.jpg" alt="Obývací pokoj s krbem" loading="lazy"></span>
+        <span class="polozka polozka-nahled" data-popis="Kuchyně a jídelna"><img src="img/galerie/02.jpg" alt="Kuchyně a jídelna" loading="lazy"></span>
+        <span class="polozka polozka-nahled" data-popis="Ložnice"><img src="img/galerie/03.jpg" alt="Ložnice" loading="lazy"></span>
+        <span class="polozka polozka-nahled" data-popis="Terasa"><img src="img/galerie/06.jpg" alt="Terasa" loading="lazy"></span>
+      </div>
+      <p class="stred"><a class="tlacitko" href="galerie/">Celá fotogalerie</a></p>
+    </div>
+  </section>
+
+  <section class="sekce vyzva">
+    <div class="obal vyzva-obsah">
+      <div>
+        <h2>Volný termín zjistíte jednou zprávou</h2>
+        <p>Napište nám, kdy byste chtěli přijet a kolik vás bude. Ozveme se do 24 hodin.</p>
+      </div>
+      <a class="tlacitko" href="rezervace/">Poptat termín</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="paticka">
+  <div class="obal paticka-obsah">
+    <div class="paticka-znacka">
+      <p class="znacka-nazev">Okno pod hvězdami</p>
+      <p class="znacka-podtitul">prázdninový dům</p>
+    </div>
+    <nav aria-label="Patička">
+      <a href="dum/">Dům</a>
+      <a href="galerie/">Galerie</a>
+      <a href="rezervace/">Rezervace</a>
+      <a href="pro-hosty/">Pro hosty</a>
+      <a href="kontakt/">Kontakt</a>
+    </nav>
+    <p class="paticka-claim">Váš druhý domov pro společné chvíle.</p>
+  </div>
+  <div class="obal paticka-ikony">
+    <span>Příroda</span><span>Rodina</span><span>Klid</span><span>Komfort</span><span>Hvězdy</span>
+  </div>
+  <p class="copy">
+    © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>
+    Provozovatel <span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span>
+  </p>
+</footer>
+
+<div class="lupa" id="lupa" hidden>
+  <button class="lupa-zavrit" aria-label="Zavřít">×</button>
+  <button class="lupa-sip lupa-predchozi" aria-label="Předchozí">‹</button>
+  <img id="lupa-foto" alt="">
+  <button class="lupa-sip lupa-dalsi" aria-label="Další">›</button>
+  <p class="lupa-popis" id="lupa-popis"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

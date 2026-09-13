@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fotogalerie – Okno pod hvězdami</title>
+<meta name="description" content="Fotky prázdninového domu v Městečku Trnávka: interiér, ložnice, terasa, zahrada i okolí.">
+<meta property="og:title" content="Fotogalerie – Okno pod hvězdami">
+<meta property="og:description" content="Fotky prázdninového domu v Městečku Trnávka: interiér, ložnice, terasa, zahrada i okolí.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../img/logo.jpg">
+<meta property="og:locale" content="cs_CZ">
+<link rel="icon" href="../img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body class="podstranka">
+
+<a class="preskocit" href="#obsah">Přeskočit na obsah</a>
+
+<header class="hlavicka prilepena" id="hlavicka">
+  <div class="obal hlavicka-obsah">
+    <a class="znacka" href="../">
+      <span class="znacka-nazev">Okno pod hvězdami</span>
+      <span class="znacka-podtitul">prázdninový dům</span>
+    </a>
+    <button class="menu-tlacitko" aria-expanded="false" aria-controls="navigace">
+      <span class="menu-carky" aria-hidden="true"></span>
+      <span class="skryte">Menu</span>
+    </button>
+    <nav id="navigace" class="navigace" aria-label="Hlavní navigace">
+      <a href="../dum/">Dům</a>
+      <a href="../galerie/" class="aktivni" aria-current="page">Galerie</a>
+      <a href="../rezervace/">Rezervace</a>
+      <a href="../pro-hosty/">Pro hosty</a>
+      <a href="../kontakt/">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="obsah">
+  <section class="hlava-stranky">
+    <div class="obal">
+      <p class="nadhodnoceni">Fotogalerie</p>
+      <h1>Nakoukněte dovnitř</h1>
+      <p class="hlava-perex">
+        Obývák s krbem, kuchyně, ložnice, dětský koutek, terasa i zahrada.
+        Kliknutím se fotka zvětší, šipkami procházíte dál.
+      </p>
+    </div>
+  </section>
+
+  <section class="sekce">
+    <div class="obal">
+      <div class="galerie">
+        <button class="polozka" data-popis="Obývací pokoj s krbem"><img src="../img/galerie/01.jpg" alt="Obývací pokoj s krbem" loading="lazy"><span class="polozka-popis">Obývací pokoj s krbem</span></button>
+        <button class="polozka" data-popis="Kuchyně a jídelna"><img src="../img/galerie/02.jpg" alt="Kuchyně a jídelna" loading="lazy"><span class="polozka-popis">Kuchyně a jídelna</span></button>
+        <button class="polozka" data-popis="Ložnice"><img src="../img/galerie/03.jpg" alt="Ložnice" loading="lazy"><span class="polozka-popis">Ložnice</span></button>
+        <button class="polozka" data-popis="Dětský koutek"><img src="../img/galerie/04.jpg" alt="Dětský koutek" loading="lazy"><span class="polozka-popis">Dětský koutek</span></button>
+        <button class="polozka" data-popis="Koupelna"><img src="../img/galerie/05.jpg" alt="Koupelna" loading="lazy"><span class="polozka-popis">Koupelna</span></button>
+        <button class="polozka" data-popis="Terasa"><img src="../img/galerie/06.jpg" alt="Terasa" loading="lazy"><span class="polozka-popis">Terasa</span></button>
+        <button class="polozka" data-popis="Zahrada"><img src="../img/galerie/07.jpg" alt="Zahrada" loading="lazy"><span class="polozka-popis">Zahrada</span></button>
+        <button class="polozka" data-popis="Okolí a hrad Cimburk"><img src="../img/galerie/08.jpg" alt="Okolí a hrad Cimburk" loading="lazy"><span class="polozka-popis">Okolí a hrad Cimburk</span></button>
+      </div>
+      <p class="poznamka">Fotky doplníme podle <code>FOTKY.md</code> — dokud chybí, drží jim místo popisek.</p>
+    </div>
+  </section>
+
+  <section class="sekce vyzva">
+    <div class="obal vyzva-obsah">
+      <div>
+        <h2>Líbí se vám to?</h2>
+        <p>Napište nám termín a kolik vás bude. Ozveme se do 24 hodin.</p>
+      </div>
+      <a class="tlacitko" href="../rezervace/">Poptat termín</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="paticka">
+  <div class="obal paticka-obsah">
+    <div class="paticka-znacka">
+      <p class="znacka-nazev">Okno pod hvězdami</p>
+      <p class="znacka-podtitul">prázdninový dům</p>
+    </div>
+    <nav aria-label="Patička">
+      <a href="../dum/">Dům</a>
+      <a href="../galerie/" class="aktivni" aria-current="page">Galerie</a>
+      <a href="../rezervace/">Rezervace</a>
+      <a href="../pro-hosty/">Pro hosty</a>
+      <a href="../kontakt/">Kontakt</a>
+    </nav>
+    <p class="paticka-claim">Váš druhý domov pro společné chvíle.</p>
+  </div>
+  <div class="obal paticka-ikony">
+    <span>Příroda</span><span>Rodina</span><span>Klid</span><span>Komfort</span><span>Hvězdy</span>
+  </div>
+  <p class="copy">
+    © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>
+    Provozovatel <span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span>
+  </p>
+</footer>
+
+<div class="lupa" id="lupa" hidden>
+  <button class="lupa-zavrit" aria-label="Zavřít">×</button>
+  <button class="lupa-sip lupa-predchozi" aria-label="Předchozí">‹</button>
+  <img id="lupa-foto" alt="">
+  <button class="lupa-sip lupa-dalsi" aria-label="Další">›</button>
+  <p class="lupa-popis" id="lupa-popis"></p>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>
