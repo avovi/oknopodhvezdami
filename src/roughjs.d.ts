@@ -12,6 +12,10 @@ declare module 'roughjs/bundled/rough.esm.js' {
     stroke?: string;
     strokeWidth?: number;
     disableMultiStroke?: boolean;
+    fillStyle?: 'hachure' | 'solid' | 'zigzag' | 'cross-hatch' | 'dots';
+    hachureGap?: number;
+    hachureAngle?: number;
+    fillWeight?: number;
   }
 
   export interface Kresba {

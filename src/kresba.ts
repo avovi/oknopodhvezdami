@@ -39,6 +39,25 @@ const krivka = (d: string, ruka: Ruka): string[] =>
 const lomena = (body: Bod[], ruka: Ruka): string[] =>
   cesty(kresli.linearPath(body, ruka));
 
+/**
+ * Plocha vykreslená šrafou — tón, který dělá z obrysu malbu.
+ * Vrací zvlášť šrafu a zvlášť obrys, aby šlo každé dát jinou sytost.
+ */
+function plocha(body: Bod[], ruka: Ruka, mezera = 4.5): { sraf: string[]; obrys: string[] } {
+  const sraf = cesty(
+    kresli.polygon(body, {
+      ...ruka,
+      fill: '#000',
+      fillStyle: 'hachure',
+      hachureGap: mezera,
+      hachureAngle: -41,
+      fillWeight: 0.55,
+      stroke: 'none',
+    }),
+  );
+  return { sraf, obrys: cesty(kresli.polygon(body, { ...ruka, fill: 'none' })) };
+}
+
 /** Chalupa: stěny, okapní hrana a sedlová střecha. */
 function domek(x: number, sirka: number, vyska: number, zaklad: number, strecha: number, ruka: Ruka): string[] {
   const v = zaklad - vyska;
@@ -93,15 +112,52 @@ const hvezda = (x: number, y: number, r: number): string => {
 const hvezdy: Bod[] = [[430, 68], [479, 104], [389, 109], [467, 33], [105, 68]];
 const velikosti = [18, 10, 7, 6, 8.5];
 
+/**
+ * Cimburk podle dobové rekonstrukce: mohutný palác s vysokou valbovou
+ * střechou, z jehož pravé části vyrůstá válcová věž s vysokou špičkou.
+ * Vpravo přes nádvoří nižší křídlo s věžicí, celé obehnané palisádou.
+ */
+const palacStrecha = plocha([[140, 117], [157, 95], [191, 95], [208, 117]], dalka, 3.8);
+const vezSpicka = plocha([[181, 83], [196, 51], [211, 83]], dalka, 3.4);
+const kridloStrecha = plocha([[206, 127], [220, 111], [234, 127]], dalka, 3.4);
+const vezicSpicka = plocha([[232, 123], [243, 103], [254, 123]], dalka, 3.2);
+
 const hrad = [
-  ...lomena([[150, 112], [150, 86], [206, 86], [206, 112]], dalka),
-  ...lomena([[143, 86], [178, 64], [213, 86]], dalka),
-  ...lomena([[184, 88], [184, 54], [205, 54], [205, 88]], dalka),
-  ...lomena([[180, 54], [194.5, 28], [209, 54]], dalka),
+  // nižší křídlo vlevo, přisazené k paláci
+  ...lomena([[126, 151], [126, 133], [146, 131]], dalka),
+  ...cara([122, 133], [150, 126], dalka),
+  // palác
+  ...lomena([[146, 150], [146, 117], [202, 117], [202, 149]], dalka),
+  ...palacStrecha.obrys,
+  // válcová věž s vysokou špičkou
+  ...lomena([[185, 121], [185, 83], [207, 83], [207, 121]], dalka),
+  ...vezSpicka.obrys,
+  // východní křídlo a věžice hned vedle
+  ...lomena([[206, 149], [206, 127], [234, 127], [234, 151]], dalka),
+  ...kridloStrecha.obrys,
+  ...lomena([[234, 151], [234, 123], [254, 123], [254, 153]], dalka),
+  ...vezicSpicka.obrys,
+  // hradba kopíruje hranu ostrohu
+  ...krivka('M110 152 C130 148 160 146 196 146 C226 146 250 149 270 155', dalka),
+];
+
+/** Palisáda na hradbě — kůly posazené podle sklonu terénu. */
+const palisada = [116, 121, 126, 131, 258, 263, 268].flatMap((x) => {
+  const y = x < 140 ? 150 - (x - 112) * 0.22 : 152 + (x - 254) * 0.3;
+  return cara([x, y], [x, y - 7], dalka);
+});
+hrad.push(...palisada);
+
+const hradSraf = [
+  ...palacStrecha.sraf,
+  ...vezSpicka.sraf,
+  ...kridloStrecha.sraf,
+  ...vezicSpicka.sraf,
 ];
 
 const kopec = krivka(
-  'M0 203 C40 198 70 172 104 148 C136 125 166 110 194 108 C224 106 252 126 282 152 C312 178 340 196 374 203',
+  'M0 214 C34 210 60 186 92 164 C118 146 142 140 176 139 C214 138 248 142 276 152'
+  + ' C312 165 344 194 396 212',
   klid,
 );
 
@@ -118,7 +174,9 @@ const mestecko = [
 const dum = [
   ...lomena([[391, 214], [391, 172], [469, 172], [469, 214]], popredi),
   ...lomena([[382, 172], [430, 137], [478, 172]], popredi),
-  ...lomena([[453, 150], [453, 130], [462, 130], [462, 157]], popredi),
+  ...cara([453, 148], [453, 131], popredi),
+  ...cara([453, 131], [462, 131], popredi),
+  ...cara([462, 131], [462, 155], popredi),
   ...lomena([[422, 214], [422, 196], [431, 190], [440, 196], [440, 214]], popredi),
 ];
 
@@ -144,7 +202,8 @@ ${hvezdy.map((h, i) => `      <path d="${hvezda(h[0], h[1], velikosti[i] ?? 6)}"
     </g>
 
     <!-- Cimburk na hřebeni -->
-${skupina(hrad, 0.9, 0.5)}
+${skupina(hradSraf, 0.5, 0.28)}
+${skupina(hrad, 0.9, 0.62)}
 
     <!-- kopec -->
 ${skupina(kopec, 1.15, 0.8)}
