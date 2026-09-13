@@ -553,3 +553,38 @@ code {
 @media (max-width: 560px) {
   body.podstranka { padding-top: 64px; }
 }
+
+/* ---------- fotka okolí pod barevnou plochou ---------- */
+/*
+ * Fotka leží pod barevnou vrstvou, která ji z 85 % zakryje — zbyde
+ * z ní nálada a textura, ne detaily, takže text nad ní zůstane
+ * čitelný stejně jako na plné barvě. Mezivrstva ji navíc mírně
+ * ztmaví, aby barvu nevybledla přepálená obloha nebo sníh.
+ * Krytí se ladí proměnnou
+ * --kryti; níž než 0.8 už text začne plavat. Když fotka chybí,
+ * zbyde plná barva a nic se nerozbije.
+ */
+.sekce-foto {
+  --kryti: 0.85;
+  --plocha: 151, 162, 137;
+  background-color: var(--salvej);
+  background-image:
+    linear-gradient(rgba(var(--plocha), var(--kryti)), rgba(var(--plocha), var(--kryti))),
+    linear-gradient(rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.18)),
+    var(--foto);
+  background-size: cover;
+  background-position: center;
+}
+.sekce-foto.sekce-cihla { --plocha: 168, 88, 77; background-color: var(--cihla); }
+.sekce-foto.vyzva { --plocha: 217, 201, 183; --kryti: 0.88; background-color: var(--bezova); }
+
+/* ---------- hero: pomalé střídání fotek ---------- */
+
+.hero-foto img { position: absolute; inset: 0; }
+.hero-foto img + img { opacity: 0; transition: opacity 2.5s ease; }
+.hero-foto img.vepredu { opacity: 1; }
+.hero-foto img.vzadu { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-foto img + img { display: none; }
+}

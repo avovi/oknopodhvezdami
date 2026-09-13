@@ -204,6 +204,35 @@ function naplouvani(): void {
   prvky.forEach((prvek) => hlidac.observe(prvek));
 }
 
+/**
+ * Hero fotky se pomalu prostřídají. Když je nahraná jen jedna,
+ * nic se neděje; kdo má v systému vypnuté animace, uvidí první.
+ */
+function heroStridani(): void {
+  const misto = document.querySelector<HTMLElement>('.hero-foto');
+  if (!misto) return;
+
+  const fotky = Array.from(misto.querySelectorAll('img')).filter(
+    (obrazek) => obrazek.complete && obrazek.naturalWidth > 0
+  );
+  if (fotky.length < 2) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  fotky.forEach((obrazek, index) => {
+    obrazek.classList.toggle('vepredu', index === 0);
+    obrazek.classList.toggle('vzadu', index !== 0);
+  });
+
+  let ukazuje = 0;
+  window.setInterval(() => {
+    const stara = fotky[ukazuje];
+    ukazuje = (ukazuje + 1) % fotky.length;
+    const nova = fotky[ukazuje];
+    stara?.classList.replace('vepredu', 'vzadu');
+    nova?.classList.replace('vzadu', 'vepredu');
+  }, 7000);
+}
+
 /** Rok v patičce. */
 function rok(): void {
   const el = document.querySelector<HTMLElement>('#rok');
@@ -213,6 +242,7 @@ function rok(): void {
 hlavicka();
 menu();
 chybejiciFotky();
+heroStridani();
 galerie();
 formular();
 naplouvani();
