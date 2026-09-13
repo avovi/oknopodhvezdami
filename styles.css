@@ -1,16 +1,16 @@
 /* Okno pod hvězdami — vizuální styl podle barevné typologie */
 
 :root {
-  --salvej: #A7B19A;
-  --salvej-tmava: #7F8B71;
-  --cihla: #A65A4E;
-  --cihla-tmava: #8C4840;
+  --salvej: #97A289;
+  --salvej-tmava: #7C876F;
+  --cihla: #A8584D;
+  --cihla-tmava: #8C453C;
   --bezova: #D9C9B7;
   --bezova-svetla: #EDE4D9;
-  --bila: #F9F7F5;
-  --cerna: #2B2B2B;
-  --text: #2B2B2B;
-  --text-tlumeny: #5E5A55;
+  --bila: #FFFFFF;
+  --cerna: #000000;
+  --text: #000000;
+  --text-tlumeny: #4F4F4F;
   --nadpis: "Playfair Display", Georgia, "Times New Roman", serif;
   --text-font: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --akcent-font: "Parisienne", "Playfair Display", cursive;
@@ -73,10 +73,10 @@ a { color: inherit; }
   color: var(--bila);
 }
 .hlavicka.prilepena {
-  background: rgba(249, 247, 245, 0.96);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(8px);
   color: var(--cerna);
-  box-shadow: 0 1px 0 rgba(43, 43, 43, 0.08);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
   padding: 0.6rem 0;
 }
 
@@ -139,14 +139,14 @@ a { color: inherit; }
   text-align: center;
   color: var(--bila);
   overflow: hidden;
-  background: linear-gradient(160deg, #6f7a63, #99866f 55%, #a65a4e);
+  background: linear-gradient(160deg, #6B7560, #99866f 55%, #A8584D);
 }
 .hero-foto { position: absolute; inset: 0; }
 .hero-foto img { width: 100%; height: 100%; object-fit: cover; }
 .hero::after {
   content: "";
   position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(43,43,43,0.45), rgba(43,43,43,0.25) 40%, rgba(43,43,43,0.6));
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45), rgba(0,0,0,0.25) 40%, rgba(0,0,0,0.6));
 }
 .hero-obsah { position: relative; z-index: 2; padding: 8rem 0 5rem; }
 
@@ -191,8 +191,8 @@ a { color: inherit; }
   transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
 }
 .tlacitko:hover, .tlacitko:focus-visible { background: var(--cihla-tmava); border-color: var(--cihla-tmava); }
-.tlacitko-lehke { background: transparent; border-color: rgba(249, 247, 245, 0.7); color: var(--bila); }
-.tlacitko-lehke:hover, .tlacitko-lehke:focus-visible { background: rgba(249, 247, 245, 0.14); border-color: var(--bila); }
+.tlacitko-lehke { background: transparent; border-color: rgba(255, 255, 255, 0.7); color: var(--bila); }
+.tlacitko-lehke:hover, .tlacitko-lehke:focus-visible { background: rgba(255, 255, 255, 0.14); border-color: var(--bila); }
 .tlacitko-svetle { background: var(--bila); color: var(--cerna); border-color: var(--bila); }
 .tlacitko-svetle:hover, .tlacitko-svetle:focus-visible { background: var(--bezova-svetla); border-color: var(--bezova-svetla); color: var(--cerna); }
 
@@ -256,9 +256,9 @@ a { color: inherit; }
 .sekce { padding: clamp(4.5rem, 9vw, 7.5rem) 0; }
 .sekce-svetla { background: var(--bezova-svetla); }
 .sekce-salvej { background: var(--salvej); color: var(--bila); }
-.sekce-salvej .nadhodnoceni { color: rgba(249, 247, 245, 0.85); }
+.sekce-salvej .nadhodnoceni { color: rgba(255, 255, 255, 0.85); }
 .sekce-cihla { background: var(--cihla); color: var(--bila); }
-.sekce-cihla .nadhodnoceni { color: rgba(249, 247, 245, 0.85); }
+.sekce-cihla .nadhodnoceni { color: rgba(255, 255, 255, 0.85); }
 
 .nadhodnoceni {
   font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
@@ -287,23 +287,23 @@ a { color: inherit; }
 }
 .vybaveni li {
   padding: 0.7rem 0 0.7rem 1.6rem; position: relative;
-  border-bottom: 1px solid rgba(43, 43, 43, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   font-size: 0.92rem;
 }
 .vybaveni li::before { content: "—"; position: absolute; left: 0; color: var(--salvej-tmava); }
 
 .poznamka { font-size: 0.82rem; color: var(--text-tlumeny); margin-top: 1.2rem; }
-.sekce-cihla .poznamka, .sekce-salvej .poznamka { color: rgba(249, 247, 245, 0.8); }
+.sekce-cihla .poznamka, .sekce-salvej .poznamka { color: rgba(255, 255, 255, 0.8); }
 
 .doplnit {
-  background: rgba(166, 90, 78, 0.12);
+  background: rgba(168, 88, 77, 0.12);
   border-bottom: 1px dashed var(--cihla);
   padding: 0 0.25em;
   color: var(--cihla-tmava);
   font-style: italic;
 }
 .sekce-cihla .doplnit, .sekce-salvej .doplnit {
-  background: rgba(249, 247, 245, 0.2); border-bottom-color: var(--bila); color: var(--bila);
+  background: rgba(255, 255, 255, 0.2); border-bottom-color: var(--bila); color: var(--bila);
 }
 
 /* ---------- pro koho ---------- */
@@ -343,7 +343,7 @@ a { color: inherit; }
 .polozka:hover img { transform: scale(1.05); }
 .polozka-popis {
   position: absolute; inset: auto 0 0; padding: 1.6rem 1rem 0.9rem;
-  background: linear-gradient(to top, rgba(43,43,43,0.7), transparent);
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
   color: var(--bila); font-size: 0.72rem; letter-spacing: 0.12em;
   text-transform: uppercase; opacity: 0; transition: opacity 0.3s ease;
 }
@@ -368,7 +368,7 @@ a { color: inherit; }
 
 .formular {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 2rem;
-  background: rgba(249, 247, 245, 0.12);
+  background: rgba(255, 255, 255, 0.12);
   padding: clamp(1.5rem, 4vw, 2.8rem);
 }
 .pole { display: flex; flex-direction: column; gap: 0.4rem; }
@@ -376,8 +376,8 @@ a { color: inherit; }
 .pole label { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; }
 .pole input, .pole textarea {
   font-family: var(--text-font); font-size: 0.95rem; font-weight: 300;
-  padding: 0.7rem 0.9rem; border: 1px solid rgba(249, 247, 245, 0.5);
-  background: rgba(249, 247, 245, 0.92); color: var(--cerna);
+  padding: 0.7rem 0.9rem; border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.92); color: var(--cerna);
   border-radius: 0;
 }
 .pole input:focus, .pole textarea:focus { outline: 2px solid var(--bila); outline-offset: 1px; }
@@ -392,10 +392,10 @@ a { color: inherit; }
 .panel > *:last-child { margin-bottom: 0; }
 
 .cenik { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-.cenik th, .cenik td { text-align: left; padding: 0.7rem 0; border-bottom: 1px solid rgba(43,43,43,0.1); font-weight: 400; }
+.cenik th, .cenik td { text-align: left; padding: 0.7rem 0; border-bottom: 1px solid rgba(0,0,0,0.1); font-weight: 400; }
 .cenik td { text-align: right; }
 
-details { border-bottom: 1px solid rgba(43,43,43,0.1); padding: 0.7rem 0; }
+details { border-bottom: 1px solid rgba(0,0,0,0.1); padding: 0.7rem 0; }
 details summary { cursor: pointer; font-weight: 400; list-style: none; position: relative; padding-right: 1.6rem; }
 details summary::-webkit-details-marker { display: none; }
 details summary::after { content: "+"; position: absolute; right: 0; color: var(--cihla); }
@@ -409,7 +409,7 @@ details p { margin: 0.7rem 0 0; font-size: 0.92rem; color: var(--text-tlumeny); 
 .kontakty { list-style: none; padding: 0; margin: 2rem 0 0; }
 .kontakty li {
   display: flex; gap: 1.5rem; padding: 0.8rem 0;
-  border-bottom: 1px solid rgba(43,43,43,0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 .kontakty li > span:first-child {
   flex: 0 0 7rem; font-size: 0.7rem; letter-spacing: 0.2em;
@@ -434,7 +434,7 @@ details p { margin: 0.7rem 0 0; font-size: 0.92rem; color: var(--text-tlumeny); 
   display: flex; justify-content: center; gap: clamp(1rem, 5vw, 4rem);
   flex-wrap: wrap;
   margin-top: 2.5rem; padding-top: 2rem;
-  border-top: 1px solid rgba(249, 247, 245, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
 }
 .paticka-ikony span { font-size: 0.68rem; letter-spacing: 0.26em; text-transform: uppercase; }
 .copy { text-align: center; font-size: 0.72rem; letter-spacing: 0.1em; margin: 2rem 0 0; opacity: 0.85; }
@@ -443,7 +443,7 @@ details p { margin: 0.7rem 0 0; font-size: 0.92rem; color: var(--text-tlumeny); 
 
 .lupa {
   position: fixed; inset: 0; z-index: 90;
-  background: rgba(43, 43, 43, 0.94);
+  background: rgba(0, 0, 0, 0.94);
   display: grid; grid-template-columns: auto 1fr auto; align-items: center;
   gap: 1rem; padding: 4rem 1.5rem;
 }
@@ -513,7 +513,7 @@ body.podstranka .hlavicka { position: fixed; }
 .hlava-stranky {
   background: var(--bezova-svetla);
   padding: clamp(3rem, 7vw, 5rem) 0 clamp(2.5rem, 5vw, 3.5rem);
-  border-bottom: 1px solid rgba(43, 43, 43, 0.06);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 .hlava-stranky h1 {
   font-size: clamp(2rem, 4.6vw, 3.2rem);
@@ -538,15 +538,15 @@ body.podstranka .hlavicka { position: fixed; }
 .vyzva-obsah h2 { margin-bottom: 0.3em; }
 .vyzva-obsah p { margin: 0; color: var(--text-tlumeny); }
 .vyzva-tlacitka { display: flex; gap: 1rem; flex-wrap: wrap; }
-.tlacitko-tmave { color: var(--cerna); border-color: rgba(43, 43, 43, 0.5); }
+.tlacitko-tmave { color: var(--cerna); border-color: rgba(0, 0, 0, 0.5); }
 .tlacitko-tmave:hover, .tlacitko-tmave:focus-visible {
-  background: rgba(43, 43, 43, 0.06); border-color: var(--cerna); color: var(--cerna);
+  background: rgba(0, 0, 0, 0.06); border-color: var(--cerna); color: var(--cerna);
 }
 
 .panel a { color: var(--cihla-tmava); }
 
 code {
-  font-size: 0.85em; background: rgba(43, 43, 43, 0.06);
+  font-size: 0.85em; background: rgba(0, 0, 0, 0.06);
   padding: 0.1em 0.4em;
 }
 

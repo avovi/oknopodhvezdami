@@ -47,11 +47,15 @@ jinak se změna na web nepropíše.
 
 | | |
 | --- | --- |
-| šalvějová | `#A7B19A` |
-| tlumená cihlová | `#A65A4E` |
+| šalvějová | `#97A289` |
+| tlumená cihlová | `#A8584D` |
 | béžová | `#D9C9B7` |
-| bílá | `#F9F7F5` |
-| doplňková černá | `#2B2B2B` |
+| bílá | `#FFFFFF` |
+| doplňková černá | `#000000` |
+
+Z nich jsou odvozené dva pracovní odstíny, které v paletě nejsou: světlejší
+béžová `#EDE4D9` na plochy sekcí a tmavší varianty zelené a cihlové na najetí
+myší. Všechny jsou v `styles.css` nahoře jako proměnné.
 
 Nadpisy Playfair Display, texty Montserrat, akcenty skriptem (Parisienne jako
 náhrada za Alluna, která na Google Fonts není).
