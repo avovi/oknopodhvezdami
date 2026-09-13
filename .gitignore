@@ -2,32 +2,32 @@
 #  OKNO POD HVĚZDAMI — co zbývá dořešit
 # ═══════════════════════════════════════════════════════════════════
 #
-# ── 1. LOGO — dvě věci k opravě ─────────────────────────────────────
+# ── 1. LOGO — dvě věci k odsouhlasení ───────────────────────────────
 #
-#   a) V logu chybí háček: je tam "OKNO POD HVEZDAMI", má být
-#      "HVĚZDAMI". Na brand boardu (podklady/barvova typologie.PNG)
-#      háček je, v logu (podklady/logo.jpg) není — takže jedno z toho
-#      je špatně. Pokud je "HVEZDAMI" schválně (stylizace, bezpatkové
-#      verzálky bez diakritiky), je potřeba to potvrdit, protože český
-#      zákazník to přečte jako překlep.
+#   a) Logo má v nápisu "OKNO POD HVEZDAMI" bez háčku nad E, kdežto
+#      na brand boardu je "HVĚZDAMI" s háčkem. Potřebujeme vědět,
+#      která verze je ta platná. Pokud je verze bez háčku záměr
+#      (stylizace verzálek), necháme ji — jen ať to víme, protože
+#      část návštěvníků to může přečíst jako překlep.
 #
-#   b) V okně je jedna hvězda, ale jmenuje se to "pod hvězdami" —
-#      množné číslo. Dvě tři hvězdy různé velikosti by seděly líp
-#      a v tom malém okně by pořád byl klid.
+#   b) V okně v logu je jedna hvězda, název mluví o hvězdách v množném
+#      čísle. Nabízí se přidat ještě jednu dvě menší — je to návrh
+#      k zvážení, ne chyba.
 #
-#   Dokud se logo neopraví, používá web jen text (Playfair Display),
-#   obrázek loga je zatím jen jako favicon a OG náhled.
+#   Web zatím vypisuje název písmem Playfair Display, obrázek loga
+#   používá jen jako ikonu záložky a náhled při sdílení.
 #
-# ── 2. CO POTŘEBUJEME OD PANÍ DOPLNIT ───────────────────────────────
+# ── 2. ÚDAJE K DOPLNĚNÍ ─────────────────────────────────────────────
 #
 #   Na webu jsou tahle místa označená cihlovou barvou s přerušovaným
-#   podtržením, v šablonách je najdeš podle class="doplnit".
+#   podtržením. V šablonách je najdeš podle class="doplnit".
 #
 #   DŮM
 #     - počet lůžek a kolik lidí se v domě vyspí
 #     - dispozice (např. 4+1 na dvou podlažích)
 #     - výměra zahrady
 #     - projít seznam vybavení a škrtnout, co dům nemá
+#       (seznam je zatím návrh, ne soupis skutečnosti)
 #       (teď tam je: krb, myčka, pračka, Wi-Fi, TV, dětský koutek,
 #        postýlka, terasa, ohniště, gril, parkování, úschova kol)
 #
@@ -71,8 +71,8 @@
 #
 # ── 3. JAKÉ FOTKY POTŘEBUJEME ───────────────────────────────────────
 #
-#   Nahrát se dají na Google Disk, do sdílené složky. Názvy souborů
-#   řešit nemusí, přejmenujeme si je sami (viz FOTKY.md).
+#   Nahrát se dají na Google Disk do sdílené složky. Názvy souborů
+#   řešit nemusíte, přejmenujeme si je sami (viz FOTKY.md).
 #
 #   NUTNÉ
 #     - hlavní fotka na šířku přes celou úvodní obrazovku, aspoň
