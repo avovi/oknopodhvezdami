@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dárkový voucher – Okno pod hvězdami</title>
+<meta name="description" content="Darujte pobyt v prázdninovém domě v Městečku Trnávka. Voucher na vybranou částku, zaslaný e-mailem.">
+<meta property="og:title" content="Dárkový voucher – Okno pod hvězdami">
+<meta property="og:description" content="Darujte pobyt v prázdninovém domě v Městečku Trnávka. Voucher na vybranou částku, zaslaný e-mailem.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../img/logo.jpg">
+<meta property="og:locale" content="cs_CZ">
+<link rel="icon" href="../img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body class="podstranka" data-email="doplnit@e-mail.cz">
+
+<a class="preskocit" href="#obsah">Přeskočit na obsah</a>
+
+<header class="hlavicka prilepena" id="hlavicka">
+  <div class="obal hlavicka-obsah">
+    <a class="znacka" href="../">
+      <span class="znacka-nazev">Okno pod hvězdami</span>
+      <span class="znacka-podtitul">prázdninový dům</span>
+    </a>
+    <button class="menu-tlacitko" aria-expanded="false" aria-controls="navigace">
+      <span class="menu-carky" aria-hidden="true"></span>
+      <span class="skryte">Menu</span>
+    </button>
+    <nav id="navigace" class="navigace" aria-label="Hlavní navigace">
+      <a href="../dum/">Dům</a>
+      <a href="../galerie/">Galerie</a>
+      <a href="../rezervace/">Rezervace</a>
+      <a href="../voucher/" class="aktivni" aria-current="page">Voucher</a>
+      <a href="../pro-hosty/">Pro hosty</a>
+      <a href="../kontakt/">Kontakt</a>
+    </nav>
+  </div>
+</header>
+
+<main id="obsah">
+  <section class="hlava-stranky">
+    <div class="obal">
+      <h1>Dárkový voucher</h1>
+      <p class="hlava-perex">
+        Darujte pobyt v domě pod hvězdami. Voucher vystavíme na jméno
+        a pošleme e-mailem, obdarovaný si pak termín domluví sám.
+      </p>
+    </div>
+  </section>
+
+  <section class="sekce">
+    <div class="obal">
+      <p class="poznamka poznamka-vyrazna">
+        Částky, platnost voucheru i postup platby jsou zatím návrh —
+        je potřeba je potvrdit s majitelkou.
+      </p>
+
+      <form class="formular formular-svetly" id="voucher" data-predmet="Objednávka dárkového voucheru">
+        <fieldset class="pole pole-siroke volba">
+          <legend>Hodnota voucheru</legend>
+          <div class="volba-dlazdice">
+            <label><input type="radio" name="hodnota" value="3000 Kč" checked><span>3 000 Kč</span></label>
+            <label><input type="radio" name="hodnota" value="5000 Kč"><span>5 000 Kč</span></label>
+            <label><input type="radio" name="hodnota" value="10000 Kč"><span>10 000 Kč</span></label>
+            <label><input type="radio" name="hodnota" value="vlastní částka"><span>Vlastní částka</span></label>
+          </div>
+        </fieldset>
+
+        <div class="pole">
+          <label for="vlastni">Vlastní částka v Kč</label>
+          <input id="vlastni" name="vlastni" type="number" min="500" step="500" placeholder="např. 7 500">
+        </div>
+        <div class="pole">
+          <label for="pro-koho">Na čí jméno voucher vystavit</label>
+          <input id="pro-koho" name="pro-koho" type="text" placeholder="jméno obdarovaného">
+        </div>
+        <div class="pole">
+          <label for="v-jmeno">Vaše jméno a příjmení</label>
+          <input id="v-jmeno" name="v-jmeno" type="text" required autocomplete="name">
+        </div>
+        <div class="pole">
+          <label for="v-email">Váš e-mail</label>
+          <input id="v-email" name="v-email" type="email" required autocomplete="email">
+        </div>
+        <div class="pole">
+          <label for="v-telefon">Váš telefon</label>
+          <input id="v-telefon" name="v-telefon" type="tel" autocomplete="tel">
+        </div>
+        <div class="pole">
+          <label for="v-kod">Slevový kód</label>
+          <input id="v-kod" name="v-kod" type="text" placeholder="nepovinné">
+        </div>
+        <div class="pole pole-siroke">
+          <label for="vzkaz">Osobní vzkaz na voucher</label>
+          <textarea id="vzkaz" name="vzkaz" rows="3" placeholder="Všechno nejlepší, ať se vám tam líbí…"></textarea>
+        </div>
+        <div class="pole pole-siroke formular-paticka">
+          <button class="tlacitko" type="submit">Objednat voucher</button>
+          <p class="poznamka">Formulář otevře váš e-mailový program s předvyplněnou objednávkou.</p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="sekce sekce-svetla">
+    <div class="obal">
+      <h2>Jak to proběhne</h2>
+      <ol class="kroky">
+        <li><strong>Objednáte voucher</strong><br>Vyberete hodnotu a napíšete, na čí jméno ho vystavit.</li>
+        <li><strong>Pošleme platební údaje</strong><br>Ozveme se e-mailem s částkou a číslem účtu.</li>
+        <li><strong>Voucher přijde e-mailem</strong><br>Jakmile platba dorazí, pošleme voucher k vytištění. Platí <span class="doplnit">doplnit platnost</span> od vystavení.</li>
+      </ol>
+      <p class="poznamka">
+        Voucher se uplatní při domluvě termínu — stačí uvést jeho číslo v poptávce.
+        Na co se nevyčerpá, <span class="doplnit">doplnit, jestli propadá nebo se vrací</span>.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="paticka">
+  <div class="obal paticka-obsah">
+    <div class="paticka-znacka">
+      <p class="znacka-nazev">Okno pod hvězdami</p>
+      <p class="znacka-podtitul">prázdninový dům</p>
+    </div>
+    <nav aria-label="Patička">
+      <a href="../dum/">Dům</a>
+      <a href="../galerie/">Galerie</a>
+      <a href="../rezervace/">Rezervace</a>
+      <a href="../voucher/" class="aktivni" aria-current="page">Voucher</a>
+      <a href="../pro-hosty/">Pro hosty</a>
+      <a href="../kontakt/">Kontakt</a>
+    </nav>
+    <p class="paticka-claim">Váš druhý domov pro společné chvíle.</p>
+  </div>
+  <p class="copy">
+    © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>
+    Provozovatel <span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span>
+  </p>
+</footer>
+
+<div class="lupa" id="lupa" hidden>
+  <button class="lupa-zavrit" aria-label="Zavřít">×</button>
+  <button class="lupa-sip lupa-predchozi" aria-label="Předchozí">‹</button>
+  <img id="lupa-foto" alt="">
+  <button class="lupa-sip lupa-dalsi" aria-label="Další">›</button>
+  <p class="lupa-popis" id="lupa-popis"></p>
+</div>
+
+<script src="../script.js"></script>
+</body>
+</html>

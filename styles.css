@@ -575,3 +575,46 @@ code {
   padding-left: 0.9rem;
 }
 .vybaveni-navrh li { opacity: 0.75; }
+
+/* ---------- výběr hodnoty voucheru ---------- */
+
+.formular-svetly {
+  background: var(--bezova-svetla);
+}
+.formular-svetly .pole input,
+.formular-svetly .pole textarea {
+  border-color: rgba(0, 0, 0, 0.15);
+  background: var(--bila);
+}
+.formular-svetly .pole input:focus,
+.formular-svetly .pole textarea:focus { outline-color: var(--cihla); }
+
+.volba { border: 0; padding: 0; margin: 0; }
+.volba legend {
+  font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+  padding: 0; margin-bottom: 0.6rem;
+}
+.volba-dlazdice {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem;
+}
+.volba-dlazdice label { cursor: pointer; }
+.volba-dlazdice input {
+  position: absolute; width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+}
+.volba-dlazdice span {
+  display: block; text-align: center;
+  padding: 0.9rem 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: var(--bila);
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+.volba-dlazdice input:checked + span {
+  background: var(--cihla); border-color: var(--cihla); color: var(--bila);
+}
+.volba-dlazdice input:focus-visible + span { outline: 2px solid var(--cerna); outline-offset: 2px; }
+
+@media (max-width: 560px) {
+  .volba-dlazdice { grid-template-columns: repeat(2, 1fr); }
+}

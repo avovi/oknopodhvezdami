@@ -141,31 +141,48 @@ function galerie() {
             ukaz(aktualni + 1);
     });
 }
-/** Poptávka — otevře e-mailový program s předvyplněnou zprávou. */
-function formular() {
-    const form = document.querySelector('#formular');
-    if (!form)
-        return;
-    const adresa = document.querySelector('.kontakty a[href^="mailto:"]');
-    const prijemce = adresa?.getAttribute('href')?.replace('mailto:', '') ?? '';
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const data = new FormData(form);
-        const hodnota = (klic) => String(data.get(klic) ?? '').trim();
-        const telo = [
-            `Jméno: ${hodnota('jmeno')}`,
-            `E-mail: ${hodnota('email')}`,
-            `Telefon: ${hodnota('telefon')}`,
-            `Počet osob: ${hodnota('osob')}`,
-            `Příjezd: ${hodnota('prijezd')}`,
-            `Odjezd: ${hodnota('odjezd')}`,
-            '',
-            hodnota('zprava'),
-        ].join('\n');
-        const predmet = `Poptávka pobytu ${hodnota('prijezd')} – ${hodnota('odjezd')}`;
-        window.location.href =
-            `mailto:${prijemce}?subject=${encodeURIComponent(predmet)}&body=${encodeURIComponent(telo)}`;
+/**
+ * Poptávka pobytu i objednávka voucheru — obojí otevře e-mailový program
+ * s předvyplněnou zprávou. Zpráva se skládá z popisků polí, takže přidat
+ * do formuláře další pole znamená jen doplnit ho v šabloně.
+ */
+function formulare() {
+    const prijemce = document.body.dataset.email ?? '';
+    document.querySelectorAll('form[data-predmet]').forEach((form) => {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const radky = [];
+            let zprava = '';
+            form.querySelectorAll('input, textarea').forEach((pole) => {
+                if (!pole.name)
+                    return;
+                if (pole.type === 'radio' && !pole.checked)
+                    return;
+                const text = pole.value.trim();
+                if (!text)
+                    return;
+                if (pole.tagName === 'TEXTAREA') {
+                    zprava = text;
+                    return;
+                }
+                radky.push(`${popisekPole(form, pole)}: ${text}`);
+            });
+            const telo = zprava ? [...radky, '', zprava].join('\n') : radky.join('\n');
+            const predmet = form.dataset.predmet ?? 'Zpráva z webu';
+            window.location.href =
+                `mailto:${prijemce}?subject=${encodeURIComponent(predmet)}&body=${encodeURIComponent(telo)}`;
+        });
     });
+}
+/** Popisek pole — z jeho <label>, u přepínačů z legendy skupiny. */
+function popisekPole(form, pole) {
+    if (pole.type === 'radio') {
+        const legenda = pole.closest('fieldset')?.querySelector('legend')?.textContent?.trim();
+        if (legenda)
+            return legenda;
+    }
+    const podleId = pole.id ? form.querySelector(`label[for="${pole.id}"]`)?.textContent?.trim() : '';
+    return podleId || pole.name;
 }
 /** Jemné naplouvání sekcí při scrollu. */
 function naplouvani() {
@@ -222,6 +239,6 @@ menu();
 chybejiciFotky();
 heroStridani();
 galerie();
-formular();
+formulare();
 naplouvani();
 rok();

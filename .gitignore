@@ -50,6 +50,14 @@
 #     - jméno provozovatele
 #     - IČO
 #
+#   VOUCHERY A SLEVY
+#     - jaké hodnoty voucherů nabízet (teď je tam návrh
+#       3 000 / 5 000 / 10 000 Kč a vlastní částka)
+#     - jak dlouho voucher platí od vystavení
+#     - co se stane se zbytkem, když ho host nevyčerpá
+#     - číslo účtu, na které se posílají platby za vouchery
+#     - jestli chce mít slevové kódy, a jaké
+#
 #   PROVOZ
 #     - od kolika je příjezd a do kolika odjezd
 #     - podmínky pro psy (kolik psů, kam nesmí, poplatek)

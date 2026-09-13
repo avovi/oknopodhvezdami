@@ -26,6 +26,16 @@ type Stranka = {
 
 const koren = join(dirname(fileURLToPath(import.meta.url)), '..');
 
+/**
+ * Kontaktní údaje na jednom místě — až je majitelka dodá, mění se jen tady
+ * a propíšou se do všech stránek i do formulářů.
+ */
+const kontakt = {
+  email: 'doplnit@e-mail.cz',
+  telefon: '+420 000 000 000',
+  telefonOdkaz: '+420000000000',
+};
+
 const stranky: Stranka[] = [
   {
     soubor: 'index.html',
@@ -71,6 +81,17 @@ const stranky: Stranka[] = [
     zaklad: '../',
     vMenu: true,
     nazevVMenu: 'Rezervace',
+    sHerem: false,
+  },
+  {
+    soubor: 'voucher/index.html',
+    adresa: 'voucher/',
+    sablona: 'voucher',
+    titulek: 'Dárkový voucher – Okno pod hvězdami',
+    popis: 'Darujte pobyt v prázdninovém domě v Městečku Trnávka. Voucher na vybranou částku, zaslaný e-mailem.',
+    zaklad: '../',
+    vMenu: true,
+    nazevVMenu: 'Voucher',
     sHerem: false,
   },
   {
@@ -130,6 +151,9 @@ for (const stranka of stranky) {
     .replaceAll('{{navigace-paticka}}', odkazy)
     .replaceAll('{{navigace}}', odkazy)
     .replaceAll('{{obsah}}', obsah)
+    .replaceAll('{{email}}', kontakt.email)
+    .replaceAll('{{telefon}}', kontakt.telefon)
+    .replaceAll('{{telefon-odkaz}}', kontakt.telefonOdkaz)
     .replaceAll('{{zaklad}}', stranka.zaklad);
 
   const cil = join(koren, stranka.soubor);

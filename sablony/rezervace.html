@@ -20,7 +20,7 @@
   <section class="sekce sekce-cihla sekce-foto" style="--foto: url('{{zaklad}}img/okoli/03.jpg')">
     <div class="obal">
       <h2>Poptávka pobytu</h2>
-      <form class="formular" id="formular">
+      <form class="formular" id="formular" data-predmet="Poptávka pobytu">
         <div class="pole">
           <label for="jmeno">Jméno a příjmení</label>
           <input id="jmeno" name="jmeno" type="text" required autocomplete="name">
@@ -45,6 +45,10 @@
           <label for="odjezd">Odjezd</label>
           <input id="odjezd" name="odjezd" type="date">
         </div>
+        <div class="pole">
+          <label for="kod">Slevový kód nebo číslo voucheru</label>
+          <input id="kod" name="kod" type="text" placeholder="nepovinné">
+        </div>
         <div class="pole pole-siroke">
           <label for="zprava">Zpráva</label>
           <textarea id="zprava" name="zprava" rows="4" placeholder="Jedeme s malými dětmi a psem, potřebovali bychom postýlku…"></textarea>
@@ -68,6 +72,10 @@
         <article class="panel">
           <h3>Co je v ceně</h3>
           <p><span class="doplnit">doplnit, co je v ceně</span> Závěrečný úklid a poplatek obci se počítají zvlášť — viz <a href="{{zaklad}}pro-hosty/">ceník</a>.</p>
+        </article>
+        <article class="panel">
+          <h3>Dárkový voucher</h3>
+          <p>Dostali jste voucher na pobyt? Uveďte jeho číslo v poptávce. Nový voucher se objednává na <a href="{{zaklad}}voucher/">samostatné stránce</a>.</p>
         </article>
         <article class="panel">
           <h3>Storno</h3>
