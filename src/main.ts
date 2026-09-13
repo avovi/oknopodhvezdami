@@ -165,9 +165,11 @@ function formulare(): void {
 
       form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea').forEach((pole) => {
         if (!pole.name) return;
-        if (pole.type === 'radio' && !(pole as HTMLInputElement).checked) return;
 
-        const text = pole.value.trim();
+        const zaskrtavatko = pole.type === 'radio' || pole.type === 'checkbox';
+        if (zaskrtavatko && !(pole as HTMLInputElement).checked) return;
+
+        const text = pole.type === 'checkbox' ? 'ano' : pole.value.trim();
         if (!text) return;
 
         if (pole.tagName === 'TEXTAREA') {
@@ -189,6 +191,8 @@ function formulare(): void {
 
 /** Popisek pole — z jeho <label>, u přepínačů z legendy skupiny. */
 function popisekPole(form: HTMLFormElement, pole: HTMLInputElement | HTMLTextAreaElement): string {
+  if (pole.type === 'checkbox') return 'Souhlas se zpracováním údajů';
+
   if (pole.type === 'radio') {
     const legenda = pole.closest('fieldset')?.querySelector('legend')?.textContent?.trim();
     if (legenda) return legenda;

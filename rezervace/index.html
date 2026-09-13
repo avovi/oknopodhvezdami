@@ -14,9 +14,7 @@
 <meta property="og:image" content="../img/logo.jpg">
 <meta property="og:locale" content="cs_CZ">
 <link rel="icon" href="../img/logo.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Montserrat:wght@300;400;500;600&family=Parisienne&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../fonty.css">
 <link rel="stylesheet" href="../styles.css">
 </head>
 <body class="podstranka" data-email="doplnit@e-mail.cz">
@@ -100,6 +98,12 @@
           <label for="zprava">Zpráva</label>
           <textarea id="zprava" name="zprava" rows="4" placeholder="Jedeme s malými dětmi a psem, potřebovali bychom postýlku…"></textarea>
         </div>
+        <div class="pole pole-siroke souhlas">
+          <label>
+            <input type="checkbox" name="souhlas" required>
+            <span>Souhlasím se zpracováním údajů podle <a href="../podminky/">podmínek ochrany osobních údajů</a>.</span>
+          </label>
+        </div>
         <div class="pole pole-siroke formular-paticka">
           <button class="tlacitko tlacitko-svetle" type="submit">Odeslat poptávku</button>
           <p class="poznamka">Formulář otevře váš e-mailový program s předvyplněnou zprávou. Nic neposíláme na cizí server.</p>
@@ -153,6 +157,7 @@
       <a href="../kontakt/">Kontakt</a>
     </nav>
     <p class="paticka-claim">Váš druhý domov pro společné chvíle.</p>
+    <p class="paticka-pravni"><a href="../podminky/">Podmínky a ochrana údajů</a></p>
   </div>
   <p class="copy">
     © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>

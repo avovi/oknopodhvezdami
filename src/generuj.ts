@@ -106,6 +106,17 @@ const stranky: Stranka[] = [
     sHerem: false,
   },
   {
+    soubor: 'podminky/index.html',
+    adresa: 'podminky/',
+    sablona: 'podminky',
+    titulek: 'Podmínky a ochrana údajů – Okno pod hvězdami',
+    popis: 'Kdo zpracovává osobní údaje zadané na webu, proč a jak dlouho. Podmínky pobytu a dárkových voucherů.',
+    zaklad: '../',
+    vMenu: false,
+    nazevVMenu: 'Podmínky',
+    sHerem: false,
+  },
+  {
     soubor: 'kontakt/index.html',
     adresa: 'kontakt/',
     sablona: 'kontakt',

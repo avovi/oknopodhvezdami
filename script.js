@@ -156,9 +156,10 @@ function formulare() {
             form.querySelectorAll('input, textarea').forEach((pole) => {
                 if (!pole.name)
                     return;
-                if (pole.type === 'radio' && !pole.checked)
+                const zaskrtavatko = pole.type === 'radio' || pole.type === 'checkbox';
+                if (zaskrtavatko && !pole.checked)
                     return;
-                const text = pole.value.trim();
+                const text = pole.type === 'checkbox' ? 'ano' : pole.value.trim();
                 if (!text)
                     return;
                 if (pole.tagName === 'TEXTAREA') {
@@ -176,6 +177,8 @@ function formulare() {
 }
 /** Popisek pole — z jeho <label>, u přepínačů z legendy skupiny. */
 function popisekPole(form, pole) {
+    if (pole.type === 'checkbox')
+        return 'Souhlas se zpracováním údajů';
     if (pole.type === 'radio') {
         const legenda = pole.closest('fieldset')?.querySelector('legend')?.textContent?.trim();
         if (legenda)
