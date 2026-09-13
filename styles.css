@@ -196,17 +196,6 @@ a { color: inherit; }
 .tlacitko-svetle { background: var(--bila); color: var(--cerna); border-color: var(--bila); }
 .tlacitko-svetle:hover, .tlacitko-svetle:focus-visible { background: var(--bezova-svetla); border-color: var(--bezova-svetla); color: var(--cerna); }
 
-/* ---------- pásek s ikonami ---------- */
-
-.pasek { background: var(--salvej); color: var(--bila); }
-.pasek-obsah {
-  display: flex; flex-wrap: wrap; justify-content: space-between;
-  gap: 1rem 2rem; padding: 1.4rem 0;
-}
-.pasek-obsah span {
-  font-size: 0.7rem; letter-spacing: 0.24em; text-transform: uppercase;
-}
-
 /* ---------- rozcestník ---------- */
 
 .rozcestnik { background: var(--bezova-svetla); padding: clamp(4rem, 8vw, 6.5rem) 0; }
@@ -476,7 +465,6 @@ details p { margin: 0.7rem 0 0; font-size: 0.92rem; color: var(--text-tlumeny); 
   .motivace-obsah > span, .sloupec-foto, .kontakt-obsah > span { max-width: 460px; margin-inline: auto; }
   .galerie { grid-template-columns: repeat(2, 1fr); }
   .karta-foto { aspect-ratio: 4 / 3; }
-  .pasek-obsah { justify-content: center; gap: 0.8rem 1.6rem; }
 
   .menu-tlacitko { display: block; }
   .navigace {
