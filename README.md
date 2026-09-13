@@ -22,6 +22,8 @@ rovnou z gitu (GitHub Pages) bez buildu na serveru.
 ```
 sablony/layout.html   společná kostra — hlavička, patička, menu
 sablony/*.html        obsah jednotlivých stránek
+sablony/cimburk.svg   kresba do patičky — generovaná, needituj ručně
+src/kresba.ts         kreslí Cimburk, městečko a dům přes rough.js
 src/generuj.ts        generátor, který z šablon poskládá HTML
 src/main.ts           chování stránky v prohlížeči
 styles.css            vizuální styl podle barevné typologie
@@ -38,6 +40,12 @@ npm install     # jednou
 npm run build   # přeloží TypeScript a vygeneruje stránky
 npm start       # http://localhost:8123
 ```
+
+Kresba v patičce se skládá při buildu knihovnou rough.js, která čáry
+rozechvěje a obtáhne dvakrát, aby vypadaly kreslené tužkou. Do prohlížeče
+se z knihovny nedostane nic — výsledkem je obyčejné statické SVG. Kompozice
+i „nálada ruky" se ladí v `src/kresba.ts`; hodnoty `roughness` a `bowing`
+říkají, jak moc se čára vlní, `seed` drží výsledek mezi buildy stejný.
 
 Texty se upravují v `sablony/`, ne ve vygenerovaných `index.html`. Po každé
 změně v `sablony/` nebo `src/` spusť `npm run build` a **zacommituj i výstup** —
