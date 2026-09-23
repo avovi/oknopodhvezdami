@@ -654,3 +654,23 @@ code {
   font-size: 1.5rem;
   margin: 0.4rem 0 0;
 }
+
+/* ---------- ceník po sezónách ---------- */
+
+.panel-siroky { grid-column: 1 / -1; }
+
+.tabulka-obal { overflow-x: auto; }
+
+.cenik-sezony { min-width: 30rem; }
+.cenik-sezony thead th {
+  font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-tlumeny); font-weight: 400;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.cenik-sezony thead th:not(:first-child) { text-align: right; }
+.cenik-sezony td { text-align: right; white-space: nowrap; }
+.cenik-sezony th[scope="row"] { font-weight: 500; padding-right: 1.5rem; }
+.termin {
+  display: block; font-weight: 300; font-size: 0.82rem;
+  color: var(--text-tlumeny);
+}

@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="../fonty.css">
 <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="podstranka" data-email="doplnit@e-mail.cz">
+<body class="podstranka" data-email="oknopodhvezdami@gmail.com">
 
 <a class="preskocit" href="#obsah">Přeskočit na obsah</a>
 
@@ -35,7 +35,6 @@
       <a href="../dum/">Dům</a>
       <a href="../galerie/">Galerie</a>
       <a href="../rezervace/" class="aktivni" aria-current="page">Rezervace</a>
-      <a href="../voucher/">Voucher</a>
       <a href="../pro-hosty/">Pro hosty</a>
       <a href="../kontakt/">Kontakt</a>
     </nav>
@@ -47,7 +46,7 @@
     <div class="obal">
       <h1>Rezervace</h1>
       <p class="hlava-perex">
-        Termín se domlouvá zprávou nebo telefonem, žádný rezervační systém.
+        Termín se domlouvá e-mailem, žádný rezervační systém.
       </p>
     </div>
   </section>
@@ -55,9 +54,9 @@
   <section class="sekce">
     <div class="obal">
       <ol class="kroky">
-        <li><strong>Napíšete nám</strong><br>Formulářem níže, e-mailem nebo telefonem. Stačí termín a kolik vás bude.</li>
-        <li><strong>Ozveme se zpátky</strong><br>Potvrdíme volno a pošleme přesnou cenu včetně poplatků. Obvykle do <span class="doplnit">doplnit, jak rychle</span>.</li>
-        <li><strong>Rezervace platí po záloze</strong><br><span class="doplnit">doplnit výši zálohy a splatnost</span>. Zbytek doplatíte při příjezdu.</li>
+        <li><strong>Napíšete nám</strong><br>Formulářem níže nebo e-mailem. Stačí termín a kolik vás bude.</li>
+        <li><strong>Ozveme se zpátky</strong><br>Potvrdíme volno a pošleme přesnou cenu včetně poplatků.</li>
+        <li><strong>Rezervace platí po záloze</strong><br>Záloha je 50 % z ceny pobytu, zbytek doplatíte 30 dní před příjezdem. Když rezervujete méně než 30 dní předem, platí se celá částka najednou.</li>
       </ol>
     </div>
   </section>
@@ -75,7 +74,7 @@
           <input id="email" name="email" type="email" required autocomplete="email">
         </div>
         <div class="pole">
-          <label for="telefon">Telefon</label>
+          <label for="telefon">Telefon na vás</label>
           <input id="telefon" name="telefon" type="tel" autocomplete="tel">
         </div>
         <div class="pole">
@@ -89,10 +88,6 @@
         <div class="pole">
           <label for="odjezd">Odjezd</label>
           <input id="odjezd" name="odjezd" type="date">
-        </div>
-        <div class="pole">
-          <label for="kod">Slevový kód nebo číslo voucheru</label>
-          <input id="kod" name="kod" type="text" placeholder="nepovinné">
         </div>
         <div class="pole pole-siroke">
           <label for="zprava">Zpráva</label>
@@ -118,23 +113,26 @@
       <div class="panely">
         <article class="panel">
           <h3>Délka pobytu</h3>
-          <p>Minimálně <span class="doplnit">doplnit</span> nocí. <span class="doplnit">doplnit, jestli se v sezóně jezdí od soboty do soboty</span></p>
+          <p>Mimo hlavní sezónu minimálně tři noci, jinak se pronajímá na celý týden.</p>
         </article>
         <article class="panel">
           <h3>Co je v ceně</h3>
-          <p><span class="doplnit">doplnit, co je v ceně</span> Závěrečný úklid a poplatek obci se počítají zvlášť — viz <a href="../pro-hosty/">ceník</a>.</p>
-        </article>
-        <article class="panel">
-          <h3>Dárkový voucher</h3>
-          <p>Dostali jste voucher na pobyt? Uveďte jeho číslo v poptávce. Nový voucher se objednává na <a href="../voucher/">samostatné stránce</a>.</p>
+          <p>Energie, závěrečný úklid i poplatek obci — všechno je v ceně pobytu. Navíc se platí jen vratná kauce a případný pes, viz <a href="../pro-hosty/">ceník</a>.</p>
         </article>
         <article class="panel">
           <h3>Storno</h3>
-          <p><span class="doplnit">doplnit storno podmínky</span></p>
+          <table class="cenik">
+            <tbody>
+              <tr><th scope="row">30 a více dní před</th><td>bez poplatku</td></tr>
+              <tr><th scope="row">29 až 8 dní před</th><td>50 % z ceny</td></tr>
+              <tr><th scope="row">7 a méně dní před</th><td>100 % z ceny</td></tr>
+            </tbody>
+          </table>
+          <p class="poznamka">Když se uvolněný termín podaří znovu obsadit, vrátíme vám celou částku sníženou jen o náklady, které do té doby vznikly.</p>
         </article>
         <article class="panel">
           <h3>Předání klíčů</h3>
-          <p>Cestu a předání klíčů domluvíme před příjezdem. Příjezd od <span class="doplnit">00:00</span>, odjezd do <span class="doplnit">00:00</span>.</p>
+          <p>Příjezd od 15:00, odjezd do 11:00. Check-in je bezkontaktní — cestu i předání klíčů domluvíme před příjezdem.</p>
         </article>
       </div>
     </div>
@@ -152,7 +150,6 @@
       <a href="../dum/">Dům</a>
       <a href="../galerie/">Galerie</a>
       <a href="../rezervace/" class="aktivni" aria-current="page">Rezervace</a>
-      <a href="../voucher/">Voucher</a>
       <a href="../pro-hosty/">Pro hosty</a>
       <a href="../kontakt/">Kontakt</a>
     </nav>
@@ -260,10 +257,7 @@
     <p class="cimburk-popisek">prázdninový dům</p>
   </div>
 
-  <p class="copy">
-    © <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka<br>
-    Provozovatel <span class="doplnit">doplnit jméno</span>, IČO <span class="doplnit">doplnit IČO</span>
-  </p>
+  <p class="copy">© <span id="rok">2026</span> Okno pod hvězdami · Městečko Trnávka</p>
 </footer>
 
 <div class="lupa" id="lupa" hidden>
