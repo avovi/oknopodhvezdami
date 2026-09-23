@@ -70,9 +70,15 @@ náhrada za Alluna, která na Google Fonts není).
 
 ## Co ještě doplnit
 
-Na stránkách jsou místa označená cihlovou barvou s přerušovaným podtržením —
-to jsou údaje k doplnění: kapacita a dispozice, ceník, adresa a GPS, telefon,
-e-mail, IČO a jméno provozovatele, časy příjezdu, podmínky pro psy, storno
-a vzdálenosti k výletům. V šablonách je najdeš podle `class="doplnit"`.
+Údaje od majitelky jsou doplněné — kapacita, vybavení, ceník po sezónách,
+záloha, storno, časy příjezdu, podmínky pro psy i vzdálenosti k výletům.
 
-Logo je potřeba upravit, to co jsme dostali má typografické a gramatické chybyy (chybějící háček a pod zvědzdami v logu je jen jedna hvězda). 
+Zbývají tři pole označená cihlovou barvou s přerušovaným podtržením, všechna
+na stránce s podmínkami: jméno provozovatelky, IČO a sídlo, plus doba uchování
+osobních údajů. V šablonách je najdeš podle `class="doplnit"`.
+
+Dál se čeká na ulici a číslo popisné (po kolaudaci), na fotky a na kalendář
+obsazenosti, který chce majitelka zveřejnit místo rezervačního systému.
+
+Logo už je opravené — verze s háčkem v nápisu „HVĚZDAMI". Jedna hvězda v okně
+zůstává, majitelka ji bere jako ilustrativní. 
