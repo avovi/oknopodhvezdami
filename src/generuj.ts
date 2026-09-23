@@ -4,6 +4,7 @@
  * rovnou z gitu bez buildu na serveru.
  */
 
+import { createHash } from 'node:crypto';
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -135,6 +136,18 @@ function slozka(cesta: string): void {
   if (nadrazena && nadrazena !== '.') mkdirSync(nadrazena, { recursive: true });
 }
 
+/**
+ * Otisk obsahu stylu a skriptu. Připojuje se k jejich adrese, aby prohlížeč
+ * po nasazení sáhl pro novou verzi — jinak drží starou z cache a web vypadá
+ * rozbitě, přestože je nahraný správně.
+ */
+const otisk = (soubor: string): string =>
+  createHash('sha1').update(readFileSync(join(koren, soubor))).digest('hex').slice(0, 8);
+
+const otiskStylu = otisk('styles.css');
+const otiskPisem = otisk('fonty.css');
+const otiskSkriptu = otisk('script.js');
+
 const kostra = sablona('layout');
 const cimburk = readFileSync(join(koren, 'sablony', 'cimburk.svg'), 'utf8').trim();
 
@@ -152,6 +165,9 @@ for (const stranka of stranky) {
     .replaceAll('{{obsah}}', obsah)
     .replaceAll('{{cimburk}}', cimburk)
     .replaceAll('{{email}}', kontakt.email)
+    .replaceAll('{{otisk-stylu}}', otiskStylu)
+    .replaceAll('{{otisk-pisem}}', otiskPisem)
+    .replaceAll('{{otisk-skriptu}}', otiskSkriptu)
     .replaceAll('{{zaklad}}', stranka.zaklad);
 
   const cil = join(koren, stranka.soubor);
