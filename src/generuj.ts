@@ -20,6 +20,8 @@ type Stranka = {
   /** kolikrát je potřeba jít nahoru, aby se trefily společné soubory */
   zaklad: string;
   vMenu: boolean;
+  /** odkaz jen v patičce — kontakt tam majitelka chce místo hlavního menu */
+  vPaticce?: boolean;
   nazevVMenu: string;
   /** domovská stránka má hero, hlavička nad ním je průhledná */
   sHerem: boolean;
@@ -52,45 +54,47 @@ const stranky: Stranka[] = [
     soubor: 'dum/index.html',
     adresa: 'dum/',
     sablona: 'dum',
-    titulek: 'Dům a vybavení – Okno pod hvězdami',
+    titulek: 'Dům – dispozice, vybavení a fotografie – Okno pod hvězdami',
     popis:
-      'Dispozice a vybavení prázdninového domu: obývák s krbem, plně vybavená kuchyně, dětský koutek, terasa a zahrada s ohništěm.',
+      'Dispozice a vybavení prázdninového domu pod hradem Cimburk: obytná kuchyně s krbem, tři ložnice, Hvězdárna ve špičce střechy, terasa s ohništěm a dětský prostor.',
     zaklad: '../',
     vMenu: true,
     nazevVMenu: 'Dům',
     sHerem: false,
   },
   {
-    soubor: 'galerie/index.html',
-    adresa: 'galerie/',
-    sablona: 'galerie',
-    titulek: 'Fotogalerie – Okno pod hvězdami',
-    popis: 'Fotky prázdninového domu v Městečku Trnávka: interiér, ložnice, terasa, zahrada i okolí.',
-    zaklad: '../',
-    vMenu: true,
-    nazevVMenu: 'Galerie',
-    sHerem: false,
-  },
-  {
     soubor: 'rezervace/index.html',
     adresa: 'rezervace/',
     sablona: 'rezervace',
-    titulek: 'Rezervace – Okno pod hvězdami',
-    popis: 'Jak si zamluvit termín v prázdninovém domě Okno pod hvězdami. Poptávka bez poplatků, odpovídáme do 24 hodin.',
+    titulek: 'Rezervace a ceník – Okno pod hvězdami',
+    popis:
+      'Kalendář obsazenosti, ceník pobytu a storno podmínky prázdninového domu Okno pod hvězdami v Městečku Trnávka.',
     zaklad: '../',
     vMenu: true,
-    nazevVMenu: 'Rezervace',
+    nazevVMenu: 'Rezervace a ceník',
     sHerem: false,
   },
   {
     soubor: 'pro-hosty/index.html',
     adresa: 'pro-hosty/',
     sablona: 'pro-hosty',
-    titulek: 'Pro hosty – ceník, cesta a výlety – Okno pod hvězdami',
-    popis: 'Ceník pobytu, cesta do Městečka Trnávka, tipy na výlety v okolí a odpovědi na časté otázky.',
+    titulek: 'Informace pro hosty – Okno pod hvězdami',
+    popis:
+      'Cesta do Městečka Trnávka, tipy na výlety, koupání a lyžování v okolí, domovní řád a časté otázky.',
     zaklad: '../',
     vMenu: true,
-    nazevVMenu: 'Pro hosty',
+    nazevVMenu: 'Informace pro hosty',
+    sHerem: false,
+  },
+  {
+    soubor: 'domovni-rad/index.html',
+    adresa: 'domovni-rad/',
+    sablona: 'domovni-rad',
+    titulek: 'Domovní řád – Okno pod hvězdami',
+    popis: 'Pár jednoduchých pravidel pro pobyt v prázdninovém domě Okno pod hvězdami.',
+    zaklad: '../',
+    vMenu: false,
+    nazevVMenu: 'Domovní řád',
     sHerem: false,
   },
   {
@@ -98,7 +102,7 @@ const stranky: Stranka[] = [
     adresa: 'podminky/',
     sablona: 'podminky',
     titulek: 'Podmínky a ochrana údajů – Okno pod hvězdami',
-    popis: 'Kdo zpracovává osobní údaje zadané na webu, proč a jak dlouho. Podmínky pobytu a dárkových voucherů.',
+    popis: 'Domovní řád, podmínky pobytu a informace o tom, kdo zpracovává osobní údaje zadané na webu.',
     zaklad: '../',
     vMenu: false,
     nazevVMenu: 'Podmínky',
@@ -109,9 +113,10 @@ const stranky: Stranka[] = [
     adresa: 'kontakt/',
     sablona: 'kontakt',
     titulek: 'Kontakt – Okno pod hvězdami',
-    popis: 'Telefon, e-mail a adresa prázdninového domu Okno pod hvězdami v Městečku Trnávka.',
+    popis: 'E-mail a adresa prázdninového domu Okno pod hvězdami v Městečku Trnávka.',
     zaklad: '../',
-    vMenu: true,
+    vMenu: false,
+    vPaticce: true,
     nazevVMenu: 'Kontakt',
     sHerem: false,
   },
@@ -120,9 +125,9 @@ const stranky: Stranka[] = [
 const sablona = (jmeno: string): string => readFileSync(join(koren, 'sablony', `${jmeno}.html`), 'utf8');
 
 /** Odkazy v menu — aktuální stránka se označí atributem aria-current. */
-function menu(aktualni: Stranka): string {
+function menu(aktualni: Stranka, vybrane: (s: Stranka) => boolean): string {
   return stranky
-    .filter((s) => s.vMenu)
+    .filter(vybrane)
     .map((s) => {
       const aktivni = s.adresa === aktualni.adresa;
       const atribut = aktivni ? ' class="aktivni" aria-current="page"' : '';
@@ -153,14 +158,15 @@ const cimburk = readFileSync(join(koren, 'sablony', 'cimburk.svg'), 'utf8').trim
 
 for (const stranka of stranky) {
   const obsah = sablona(stranka.sablona).replaceAll('{{zaklad}}', stranka.zaklad);
-  const odkazy = menu(stranka);
+  const odkazy = menu(stranka, (s) => s.vMenu);
+  const odkazyPaticka = menu(stranka, (s) => s.vMenu || s.vPaticce === true);
 
   const html = kostra
     .replaceAll('{{titulek}}', stranka.titulek)
     .replaceAll('{{popis}}', stranka.popis)
     .replaceAll('{{telo}}', stranka.sHerem ? 'domu' : 'podstranka')
     .replaceAll('{{hlavicka}}', stranka.sHerem ? '' : 'prilepena')
-    .replaceAll('{{navigace-paticka}}', odkazy)
+    .replaceAll('{{navigace-paticka}}', odkazyPaticka)
     .replaceAll('{{navigace}}', odkazy)
     .replaceAll('{{obsah}}', obsah)
     .replaceAll('{{cimburk}}', cimburk)

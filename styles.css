@@ -333,19 +333,6 @@ a { color: inherit; }
 
 /* ---------- rezervace ---------- */
 
-.kroky {
-  list-style: none; counter-reset: krok; padding: 0;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem;
-  margin: 2.5rem 0 3.5rem;
-}
-.kroky li { counter-increment: krok; padding-top: 3.2rem; position: relative; font-size: 0.95rem; }
-.kroky li::before {
-  content: counter(krok);
-  position: absolute; top: 0; left: 0;
-  font-family: var(--nadpis); font-size: 2.2rem; opacity: 0.5;
-}
-.kroky strong { font-family: var(--nadpis); font-weight: 500; font-size: 1.2rem; }
-
 .formular {
   display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem 2rem;
   background: rgba(255, 255, 255, 0.12);
@@ -367,7 +354,8 @@ a { color: inherit; }
 /* ---------- pro hosty ---------- */
 
 .panely { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem; margin-top: 2.5rem; }
-.panel { background: var(--bezova-svetla); padding: clamp(1.6rem, 3vw, 2.4rem); }
+/* min-width: 0 — široká tabulka ceníku se má posouvat uvnitř panelu, ne roztáhnout stránku */
+.panel { background: var(--bezova-svetla); padding: clamp(1.6rem, 3vw, 2.4rem); min-width: 0; }
 .panel h3 { margin-bottom: 1rem; }
 .panel > *:last-child { margin-bottom: 0; }
 
@@ -446,7 +434,7 @@ details p { margin: 0.7rem 0 0; font-size: 0.92rem; color: var(--text-tlumeny); 
 /* ---------- responzivita ---------- */
 
 @media (max-width: 960px) {
-  .karty, .trojice, .kroky, .panely { grid-template-columns: 1fr; gap: 2rem; }
+  .karty, .trojice, .panely { grid-template-columns: 1fr; gap: 2rem; }
   .dvousloupec, .motivace-obsah, .kontakt-obsah { grid-template-columns: 1fr; }
   .motivace-obsah > span, .sloupec-foto, .kontakt-obsah > span { max-width: 460px; margin-inline: auto; }
   .galerie { grid-template-columns: repeat(2, 1fr); }
@@ -688,3 +676,182 @@ code {
 .cenik-sezony thead th { padding-bottom: 0.9rem; }
 .cenik-sezony tbody tr:first-child th,
 .cenik-sezony tbody tr:first-child td { padding-top: 0.9rem; }
+
+/* dvě bílé sekce za sebou — druhá nezačíná další velkou mezerou */
+.sekce-tesna { padding-top: 0; }
+
+/* ---------- dům: dlouhý text vedle fotky ---------- */
+
+.dvousloupec-dlouhy { align-items: start; }
+.dvousloupec-dlouhy .sloupec-foto { position: sticky; top: 110px; }
+
+/* ---------- dům: fotky ve složkách ---------- */
+
+.slozky {
+  display: none;
+  gap: 0.4rem 2.4rem; flex-wrap: wrap;
+  margin-top: 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+.slozky-zapnute .slozky { display: flex; }
+.slozka {
+  background: none; border: 0; cursor: pointer;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  padding: 0.7rem 0;
+  font-family: var(--text-font); font-weight: 400;
+  font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-tlumeny);
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+.slozka:hover { color: var(--cerna); }
+.slozka[aria-selected="true"] { color: var(--cerna); border-bottom-color: var(--cihla); }
+.slozka:focus-visible { outline: 2px solid var(--cihla); outline-offset: 4px; }
+
+.slozka-nadpis { margin: 2.5rem 0 0; }
+.slozky-zapnute .slozka-nadpis { display: none; }
+.galerie-slozka { grid-template-columns: repeat(3, 1fr); }
+
+/* ---------- rezervace: kalendář obsazenosti ---------- */
+
+.kalendar { margin-top: 1.5rem; }
+.kalendar-ovladani { display: flex; justify-content: flex-end; gap: 0.5rem; margin-bottom: 0.5rem; }
+.kalendar-sip {
+  width: 44px; height: 44px; cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2); background: var(--bila); color: var(--cerna);
+  font-size: 1.5rem; line-height: 1;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.kalendar-sip:hover:not(:disabled) { border-color: var(--cihla); color: var(--cihla); }
+.kalendar-sip:disabled { opacity: 0.3; cursor: default; }
+
+.kalendar-mesice {
+  --mesicu: 3;
+  --mezera: 2.5rem;
+  /* relative drží skryté popisky dnů uvnitř — jinak by roztáhly celou stránku do šířky */
+  position: relative;
+  display: grid; grid-auto-flow: column; align-items: start;
+  grid-auto-columns: calc((100% - (var(--mesicu) - 1) * var(--mezera)) / var(--mesicu));
+  column-gap: var(--mezera);
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+.kalendar-mesice::-webkit-scrollbar { display: none; }
+.kalendar-mesice:focus-visible { outline: 2px solid var(--cihla); outline-offset: 6px; }
+
+.mesic {
+  width: 100%; table-layout: fixed;
+  border-collapse: separate; border-spacing: 3px;
+  scroll-snap-align: start;
+}
+.mesic caption {
+  font-family: var(--nadpis); font-size: 1.25rem;
+  text-align: left; padding: 0 3px 0.5rem;
+}
+.mesic th {
+  font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 400; color: var(--text-tlumeny); padding-bottom: 0.2rem;
+}
+.mesic td { padding: 0; }
+
+.den {
+  --volno: rgba(151, 162, 137, 0.24);
+  display: grid; place-items: center;
+  aspect-ratio: 1 / 1;
+  font-size: 0.85rem; line-height: 1;
+  background: var(--volno);
+}
+.den.obsazeno { background: var(--cihla); color: var(--bila); }
+.den.prijezd { background: linear-gradient(to bottom right, var(--volno) 50%, var(--cihla) 50%); }
+.den.odjezd { background: linear-gradient(to bottom right, var(--cihla) 50%, var(--volno) 50%); }
+.den.minulost { background: none; color: rgba(0, 0, 0, 0.28); }
+
+.kalendar-zprava { color: var(--text-tlumeny); margin: 1rem 0; }
+.kalendar-zprava[hidden] { display: none; }
+
+.kalendar-legenda {
+  list-style: none; padding: 0; margin: 1.4rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0.6rem 2rem;
+  font-size: 0.85rem; color: var(--text-tlumeny);
+}
+.kalendar-legenda li { display: flex; align-items: center; gap: 0.6rem; }
+.kalendar-legenda .den { width: 1.3rem; }
+
+/* ---------- rezervace: informace, storno ---------- */
+
+.odrazky-dvousloupec { columns: 2; column-gap: 3rem; }
+.odrazky-dvousloupec li { break-inside: avoid; }
+
+.storno-obsah {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.5rem 3rem; align-items: center;
+}
+.storno-obsah p { margin: 0; }
+.storno-obsah strong { font-weight: 500; }
+
+/* ---------- pro hosty: cesta, okolí, výlety ---------- */
+
+.okoli {
+  display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(2rem, 5vw, 4rem); align-items: start;
+}
+.okoli-text a, .odkaz-ven a {
+  color: var(--cihla-tmava); text-decoration: none;
+  border-bottom: 1px solid var(--cihla);
+}
+.okoli-text a:hover, .odkaz-ven a:hover { border-bottom-width: 2px; }
+.odkaz-ven { margin-top: 1.4rem; font-size: 0.92rem; }
+.odkaz-ven a::after { content: " ↗"; }
+
+.vylety-dalsi { grid-column: 2; grid-row: 1 / span 3; }
+.vylet-pozn {
+  display: block; font-size: 0.85rem; font-style: italic;
+  color: var(--text-tlumeny); line-height: 1.5;
+}
+
+.panel-dokument { display: flex; flex-direction: column; }
+.panel-dokument .tlacitko { color: var(--bila); }
+
+/* ---------- domovní řád a podmínky ---------- */
+
+.dokument > * { max-width: 70ch; }
+.dokument h2 { font-size: clamp(1.35rem, 2.4vw, 1.65rem); margin: 2.6rem 0 0.7rem; }
+.dokument h2:first-child { margin-top: 0; }
+.dokument .odrazky { margin: 0 0 1.1em; }
+.dokument-zaver { margin-top: 2.6rem; }
+.dokument .citat { text-align: left; margin-top: 1rem; }
+
+.dokumenty {
+  list-style: none; padding: 0; margin: 1.8rem 0 0;
+  display: flex; flex-wrap: wrap; gap: 0.8rem 2.2rem;
+}
+.dokumenty a {
+  text-decoration: none;
+  font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--cihla); border-bottom: 1px solid var(--cihla);
+}
+.dokumenty a:hover { color: var(--cihla-tmava); border-color: var(--cihla-tmava); }
+
+@media (max-width: 960px) {
+  .dvousloupec-dlouhy .sloupec-foto { position: static; }
+  .galerie-slozka { grid-template-columns: repeat(2, 1fr); }
+  .kalendar-mesice { --mesicu: 2; --mezera: 1.5rem; }
+  .okoli, .storno-obsah { grid-template-columns: 1fr; }
+  .vylety-dalsi { grid-column: auto; grid-row: auto; }
+}
+
+@media (max-width: 560px) {
+  .kalendar-mesice { --mesicu: 1; }
+  .odrazky-dvousloupec { columns: 1; }
+}
+
+/* ---------- tisk — hlavně domovní řád ---------- */
+
+@media print {
+  .hlavicka, .paticka, .vyzva, .preskocit, .lupa { display: none !important; }
+  body { font-size: 11pt; line-height: 1.5; }
+  body.podstranka { padding-top: 0; }
+  .hlava-stranky { background: none; border: 0; padding: 0 0 1rem; }
+  .sekce { padding: 0; }
+  .prijde { opacity: 1 !important; transform: none !important; }
+  .dokument h2 { break-after: avoid; }
+}

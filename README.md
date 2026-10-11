@@ -10,12 +10,16 @@ rovnou z gitu (GitHub Pages) bez buildu na serveru.
 
 | Adresa | Obsah |
 | --- | --- |
-| `/` | úvod, rozcestník, pro koho je dům, náhled galerie |
-| `/dum/` | dispozice a vybavení |
-| `/galerie/` | fotogalerie se zvětšováním |
-| `/rezervace/` | jak zamluvit termín + poptávkový formulář |
-| `/pro-hosty/` | ceník, kudy k nám, výlety, časté otázky |
-| `/kontakt/` | telefon, e-mail, adresa, provozovatel |
+| `/` | úvod, rozcestník, pro koho je dům, náhled fotek |
+| `/dum/` | dispozice, vybavení, fotky ve složkách Přízemí / Podkroví / Zahrada |
+| `/rezervace/` | kalendář obsazenosti, důležité informace, ceník, storno, poptávkový formulář |
+| `/pro-hosty/` | kudy k nám, o okolí, výlety, koupání, lyžování, časté otázky |
+| `/domovni-rad/` | domovní řád — samostatná stránka, jde i vytisknout |
+| `/podminky/` | rozcestník dokumentů, podmínky pobytu, ochrana údajů |
+| `/kontakt/` | e-mail a adresa |
+
+V hlavním menu jsou jen Dům, Rezervace a ceník a Informace pro hosty —
+tak to chce majitelka. Kontakt je jen v patičce.
 
 ## Struktura
 
@@ -28,6 +32,7 @@ src/generuj.ts        generátor, který z šablon poskládá HTML
 src/main.ts           chování stránky v prohlížeči
 styles.css            vizuální styl podle barevné typologie
 script.js             zkompilovaný výstup z main.ts — needituj ručně
+obsazenost.json       obsazené termíny pro kalendář, viz níž
 index.html, dum/…     vygenerované stránky — needituj ručně
 img/                  fotky, viz FOTKY.md
 podklady/             logo a brand manuál
@@ -50,6 +55,23 @@ i „nálada ruky" se ladí v `src/kresba.ts`; hodnoty `roughness` a `bowing`
 Texty se upravují v `sablony/`, ne ve vygenerovaných `index.html`. Po každé
 změně v `sablony/` nebo `src/` spusť `npm run build` a **zacommituj i výstup** —
 jinak se změna na web nepropíše.
+
+## Kalendář obsazenosti
+
+Kalendář na stránce Rezervace a ceník si při načtení přečte `obsazenost.json`.
+Novou rezervaci zapíšeš jako další řádek — build není potřeba, stačí commit:
+
+```json
+{
+  "obsazeno": [
+    { "prijezd": "2026-12-23", "odjezd": "2026-12-30" }
+  ]
+}
+```
+
+`odjezd` je den, kdy hosté odjíždějí. Ten den kalendář ukáže napůl volný,
+protože odpoledne může přijet někdo další. Když se soubor nepodaří načíst,
+kalendář nic nevymýšlí a napíše, že volno ověříme e-mailem.
 
 ## Barvy a písma
 
@@ -77,8 +99,10 @@ Zbývají tři pole označená cihlovou barvou s přerušovaným podtržením, v
 na stránce s podmínkami: jméno provozovatelky, IČO a sídlo, plus doba uchování
 osobních údajů. V šablonách je najdeš podle `class="doplnit"`.
 
-Dál se čeká na ulici a číslo popisné (po kolaudaci), na fotky a na kalendář
-obsazenosti, který chce majitelka zveřejnit místo rezervačního systému.
+Dál se čeká na ulici a číslo popisné (po kolaudaci), na fotky a na právní
+dokumenty — obchodní podmínky a zásady ochrany údajů dodá majitelka po
+kolaudaci a patří na stránku Podmínky. Kalendář je hotový, jen zatím nemá
+žádné obsazené termíny.
 
 Logo už je opravené — verze s háčkem v nápisu „HVĚZDAMI". Jedna hvězda v okně
 zůstává, majitelka ji bere jako ilustrativní. 

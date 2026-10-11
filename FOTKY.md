@@ -13,7 +13,9 @@ béžová plocha s popisem toho, co sem patří — nic se nerozbije.
 | `img/dum.jpg` | pohled na dům v sekci Dům (na výšku) |
 | `img/motivace.jpg` | fotka u motivačního textu (na výšku) |
 | `img/kontakt.jpg` | fotka u kontaktu (na výšku) |
-| `img/galerie/01.jpg` … `08.jpg` | fotogalerie (čtverec nebo na výšku) |
+| `img/galerie/prizemi/01.jpg` … `06.jpg` | složka Přízemí na stránce Dům (čtverec) |
+| `img/galerie/podkrovi/01.jpg` … `06.jpg` | složka Podkroví |
+| `img/galerie/zahrada/01.jpg` … `06.jpg` | složka Zahrada |
 
 | `img/okoli/01.jpg` | pozadí zelené sekce na úvodní stránce |
 | `img/okoli/02.jpg` | pozadí zelené sekce na stránce Dům |
@@ -25,7 +27,10 @@ s drobnou kresbou nebo textem. Přidat další sekci s fotkou je jeden atribut
 v šabloně: `class="sekce sekce-salvej sekce-foto" style="--foto: url('...')"`.
 Sytost se ladí proměnnou `--kryti` v `styles.css`, pod 0,8 už text začne plavat.
 
-Popisky v galerii se mění v šablonách u jednotlivých položek (`data-popis` a `alt`).
+Popisky ve složkách se mění v `sablony/dum.html` u jednotlivých položek
+(`data-popis` a `alt`). Počet fotek ve složce není pevný — položku stačí
+přidat nebo smazat. Náhled na úvodní stránce bere čtyři fotky ze složek,
+odkazy na ně jsou v `sablony/domu.html`.
 
 Majitelka fotky nahrává na Google Disk do sdílené složky a názvy řešit nemusí —
 přejmenujeme si je sami podle tabulky výš.

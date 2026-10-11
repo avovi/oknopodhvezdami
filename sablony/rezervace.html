@@ -1,23 +1,90 @@
   <section class="hlava-stranky">
     <div class="obal">
-      <h1>Rezervace</h1>
+      <h1>Rezervace a ceník</h1>
       <p class="hlava-perex">
-        Termín se domlouvá e-mailem, žádný rezervační systém.
+        O rezervaci pište prosím prostřednictvím <a href="#poptavka">zprávy zde</a>
+        nebo na e-mail <a href="mailto:{{email}}">{{email}}</a>.
       </p>
     </div>
   </section>
 
-  <section class="sekce">
+  <section class="sekce" id="kalendar">
     <div class="obal">
-      <ol class="kroky">
-        <li><strong>Napíšete nám</strong><br>Formulářem níže nebo e-mailem. Stačí termín a kolik vás bude.</li>
-        <li><strong>Ozveme se zpátky</strong><br>Potvrdíme volno a pošleme přesnou cenu včetně poplatků.</li>
-        <li><strong>Rezervace platí po záloze</strong><br>Záloha je 50 % z ceny pobytu, zbytek doplatíte 30 dní před příjezdem. Když rezervujete méně než 30 dní předem, platí se celá částka najednou.</li>
-      </ol>
+      <h2>Kalendář obsazenosti</h2>
+      <div class="kalendar" data-zdroj="{{zaklad}}obsazenost.json">
+        <div class="kalendar-ovladani">
+          <button class="kalendar-sip" type="button" data-smer="-1" aria-label="Předchozí měsíc" disabled>‹</button>
+          <button class="kalendar-sip" type="button" data-smer="1" aria-label="Další měsíc" disabled>›</button>
+        </div>
+        <p class="kalendar-zprava" role="status">Načítám kalendář…</p>
+        <noscript><p>Kalendář potřebuje zapnutý JavaScript. Volný termín vám rádi ověříme e-mailem.</p></noscript>
+        <div class="kalendar-mesice" tabindex="0" aria-label="Měsíce s obsazeností domu"></div>
+        <ul class="kalendar-legenda">
+          <li><span class="den volno" aria-hidden="true"></span> volno</li>
+          <li><span class="den obsazeno" aria-hidden="true"></span> obsazeno</li>
+          <li><span class="den odjezd" aria-hidden="true"></span> střídání hostů — odjezd do 11:00, příjezd od 15:00</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <section class="sekce sekce-cihla sekce-foto" style="--foto: url('{{zaklad}}img/okoli/03.jpg')">
+  <section class="sekce sekce-tesna">
+    <div class="obal">
+      <div class="panely">
+        <article class="panel panel-siroky">
+          <h2>Důležité informace k pobytu</h2>
+          <ul class="odrazky odrazky-dvousloupec">
+            <li>Cena zahrnuje energie, úklid celého objektu, lůžkoviny, ručníky a rekreační poplatek.</li>
+            <li>Při rezervaci je třeba uhradit 50 % z ceny pobytu, zbytek nejpozději 30 dní předem. Pokud je rezervace provedena méně než 30 dní předem, hradí se celá částka najednou.</li>
+            <li>Kauci vracíme zpět na účet do 5 pracovních dnů od ukončení pobytu.</li>
+            <li>Mimo hlavní sezónu je minimální délka pobytu <strong>2 noci</strong>. V hlavní sezóně je minimální délka pobytu <strong>7 nocí</strong>.</li>
+            <li>Ubytování i odjezd probíhá bezkontaktně.</li>
+            <li><strong>Check-in od 15:00</strong></li>
+            <li><strong>Check-out do 11:00</strong></li>
+            <li>Dům je nekuřácký 🚭</li>
+          </ul>
+        </article>
+
+        <article class="panel panel-siroky" id="cenik">
+          <h2>Ceník 2026/27</h2>
+          <div class="tabulka-obal">
+            <table class="cenik cenik-sezony">
+              <thead>
+                <tr><th scope="col">Období</th><th scope="col">Týden</th><th scope="col">Noc</th><th scope="col">Vratná kauce</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">Září – červenec</th><td>35 000 Kč</td><td>6 000 Kč</td><td>5 000 Kč</td></tr>
+                <tr><th scope="row">Červenec – srpen</th><td>45 000 Kč</td><td>—</td><td>5 000 Kč</td></tr>
+                <tr><th scope="row">Vánoce</th><td>45 000 Kč</td><td>—</td><td>5 000 Kč</td></tr>
+                <tr><th scope="row">Silvestr <span class="termin">30. 12. – 6. 1.</span></th><td>49 000 Kč</td><td>—</td><td>10 000 Kč</td></tr>
+                <tr><th scope="row">Jarní prázdniny <span class="termin">1. 2. – 14. 3. 2027</span></th><td>40 000 Kč</td><td>—</td><td>5 000 Kč</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="pripletek">
+            <strong>Pes</strong> — 1 000 Kč za týden nebo 200 Kč za noc.
+            Kauce je v tom případě 8 000 Kč.
+          </p>
+        </article>
+
+        <article class="panel panel-siroky storno" id="storno">
+          <h2>Storno podmínky</h2>
+          <div class="storno-obsah">
+            <table class="cenik">
+              <tbody>
+                <tr><th scope="row">30 a více dní před</th><td>bez poplatku</td></tr>
+                <tr><th scope="row">29 až 8 dní před</th><td>50 % z ceny</td></tr>
+                <tr><th scope="row">7 a méně dní před</th><td>100 % z ceny</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Pokud se zrušený termín podaří obsadit, vracíme celou uhrazenou částku, poníženou pouze o případné vzniklé náklady.</strong></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sekce sekce-cihla sekce-foto" id="poptavka" style="--foto: url('{{zaklad}}img/okoli/03.jpg')">
     <div class="obal">
       <h2>Poptávka pobytu</h2>
       <form class="formular" id="formular" data-predmet="Poptávka pobytu">
@@ -52,7 +119,7 @@
         <div class="pole pole-siroke souhlas">
           <label>
             <input type="checkbox" name="souhlas" required>
-            <span>Souhlasím se zpracováním údajů podle <a href="{{zaklad}}podminky/">podmínek ochrany osobních údajů</a>.</span>
+            <span>Souhlasím se zpracováním údajů podle <a href="{{zaklad}}podminky/#ochrana-udaju">podmínek ochrany osobních údajů</a>.</span>
           </label>
         </div>
         <div class="pole pole-siroke formular-paticka">
@@ -60,36 +127,5 @@
           <p class="poznamka">Formulář otevře váš e-mailový program s předvyplněnou zprávou. Nic neposíláme na cizí server.</p>
         </div>
       </form>
-    </div>
-  </section>
-
-  <section class="sekce">
-    <div class="obal">
-      <h2>Co je dobré vědět předem</h2>
-      <div class="panely">
-        <article class="panel">
-          <h3>Délka pobytu</h3>
-          <p>Mimo hlavní sezónu minimálně tři noci, jinak se pronajímá na celý týden.</p>
-        </article>
-        <article class="panel">
-          <h3>Co je v ceně</h3>
-          <p>Energie, závěrečný úklid i poplatek obci — všechno je v ceně pobytu. Navíc se platí jen vratná kauce a případný pes, viz <a href="{{zaklad}}pro-hosty/">ceník</a>.</p>
-        </article>
-        <article class="panel">
-          <h3>Storno</h3>
-          <table class="cenik">
-            <tbody>
-              <tr><th scope="row">30 a více dní před</th><td>bez poplatku</td></tr>
-              <tr><th scope="row">29 až 8 dní před</th><td>50 % z ceny</td></tr>
-              <tr><th scope="row">7 a méně dní před</th><td>100 % z ceny</td></tr>
-            </tbody>
-          </table>
-          <p class="poznamka">Když se uvolněný termín podaří znovu obsadit, vrátíme vám celou částku sníženou jen o náklady, které do té doby vznikly.</p>
-        </article>
-        <article class="panel">
-          <h3>Předání klíčů</h3>
-          <p>Příjezd od 15:00, odjezd do 11:00. Check-in je bezkontaktní — cestu i předání klíčů domluvíme před příjezdem.</p>
-        </article>
-      </div>
     </div>
   </section>

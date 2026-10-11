@@ -71,27 +71,26 @@ function chybejiciFotky() {
         }
     });
 }
-/** Fotogalerie se zvětšením přes celou obrazovku. */
+/**
+ * Fotogalerie se zvětšením přes celou obrazovku. Šipky listují jen fotkami
+ * z téže galerie — v přízemí se tak nepřeskočí na zahradu.
+ */
 function galerie() {
     const lupa = document.querySelector('#lupa');
     const lupaFoto = document.querySelector('#lupa-foto');
     const lupaPopis = document.querySelector('#lupa-popis');
     if (!lupa || !lupaFoto || !lupaPopis)
         return;
-    const polozky = Array.from(document.querySelectorAll('.galerie .polozka'));
+    let seznam = [];
     let aktualni = 0;
     let vyvolal = null;
-    const snimky = () => polozky
+    const snimky = (galerie) => Array.from(galerie.querySelectorAll('button.polozka'))
         .filter((p) => !p.classList.contains('chybi-foto'))
-        .map((p) => {
-        const obrazek = p.querySelector('img');
-        return {
-            src: obrazek?.getAttribute('src') ?? '',
-            popis: p.dataset.popis ?? '',
-        };
-    });
+        .map((p) => ({
+        src: p.querySelector('img')?.getAttribute('src') ?? '',
+        popis: p.dataset.popis ?? '',
+    }));
     const ukaz = (index) => {
-        const seznam = snimky();
         if (seznam.length === 0)
             return;
         aktualni = (index + seznam.length) % seznam.length;
@@ -115,11 +114,14 @@ function galerie() {
         vyvolal?.focus();
         vyvolal = null;
     };
-    polozky.forEach((polozka) => {
+    document.querySelectorAll('.galerie button.polozka').forEach((polozka) => {
         polozka.addEventListener('click', () => {
-            if (polozka.classList.contains('chybi-foto'))
+            const galerie = polozka.closest('.galerie');
+            if (!galerie || polozka.classList.contains('chybi-foto'))
                 return;
-            const index = snimky().findIndex((s) => s.popis === (polozka.dataset.popis ?? ''));
+            seznam = snimky(galerie);
+            const src = polozka.querySelector('img')?.getAttribute('src');
+            const index = seznam.findIndex((s) => s.src === src);
             otevri(index < 0 ? 0 : index, polozka);
         });
     });
@@ -142,7 +144,174 @@ function galerie() {
     });
 }
 /**
- * Poptávka pobytu i objednávka voucheru — obojí otevře e-mailový program
+ * Fotky domu ve složkách — přízemí, podkroví, zahrada. Bez skriptu jsou
+ * vidět všechny pod sebou s nadpisy, se skriptem se přepínají záložkami.
+ */
+function slozky() {
+    const lista = document.querySelector('.slozky');
+    if (!lista)
+        return;
+    const zalozky = Array.from(lista.querySelectorAll('[role="tab"]'));
+    const panel = (zalozka) => document.getElementById(zalozka.getAttribute('aria-controls') ?? '');
+    const vyber = (vybrana) => {
+        zalozky.forEach((zalozka) => {
+            const ano = zalozka === vybrana;
+            zalozka.setAttribute('aria-selected', String(ano));
+            zalozka.tabIndex = ano ? 0 : -1;
+            const obsah = panel(zalozka);
+            if (obsah)
+                obsah.hidden = !ano;
+        });
+    };
+    zalozky.forEach((zalozka, index) => {
+        zalozka.addEventListener('click', () => vyber(zalozka));
+        zalozka.addEventListener('keydown', (e) => {
+            const posun = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+            if (!posun)
+                return;
+            e.preventDefault();
+            const dalsi = zalozky[(index + posun + zalozky.length) % zalozky.length];
+            if (!dalsi)
+                return;
+            vyber(dalsi);
+            dalsi.focus();
+        });
+    });
+    lista.parentElement?.classList.add('slozky-zapnute');
+    const prvni = zalozky[0];
+    if (prvni)
+        vyber(prvni);
+}
+const MESICE = ['Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen', 'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec'];
+const MESICE_GENITIV = ['ledna', 'února', 'března', 'dubna', 'května', 'června', 'července', 'srpna', 'září', 'října', 'listopadu', 'prosince'];
+const DNY = ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
+/** Kolik měsíců dopředu kalendář ukazuje. */
+const MESICU_DOPREDU = 18;
+/** Datum jako 2026-12-24 v místním čase — přes UTC by se den mohl posunout. */
+function klicDne(den) {
+    const mesic = String(den.getMonth() + 1).padStart(2, '0');
+    const cislo = String(den.getDate()).padStart(2, '0');
+    return `${den.getFullYear()}-${mesic}-${cislo}`;
+}
+/**
+ * Noci, které jsou obsazené. Den příjezdu je první obsazená noc, den odjezdu
+ * už ne — ten den odpoledne může přijet někdo další.
+ */
+function obsazeneNoci(pobyty) {
+    const noci = new Set();
+    pobyty.forEach(({ prijezd, odjezd }) => {
+        const den = new Date(`${prijezd}T12:00:00`);
+        const konec = new Date(`${odjezd}T12:00:00`);
+        if (Number.isNaN(den.getTime()) || Number.isNaN(konec.getTime()))
+            return;
+        for (; den < konec; den.setDate(den.getDate() + 1))
+            noci.add(klicDne(den));
+    });
+    return noci;
+}
+function mesicKalendare(rok, mesic, noci, dnes) {
+    const pocetDni = new Date(rok, mesic + 1, 0).getDate();
+    const odsazeni = (new Date(rok, mesic, 1).getDay() + 6) % 7;
+    const bunky = Array.from({ length: odsazeni }, () => '<td></td>');
+    for (let cislo = 1; cislo <= pocetDni; cislo++) {
+        const klic = klicDne(new Date(rok, mesic, cislo, 12));
+        const noc = noci.has(klic);
+        const predchoziNoc = noci.has(klicDne(new Date(rok, mesic, cislo - 1, 12)));
+        let stav = 'volno';
+        let popis = 'volno';
+        if (klic < dnes) {
+            stav = 'minulost';
+            popis = 'uplynulo';
+        }
+        else if (noc && predchoziNoc) {
+            stav = 'obsazeno';
+            popis = 'obsazeno';
+        }
+        else if (noc) {
+            stav = 'prijezd';
+            popis = 'do 11:00 volno, pak obsazeno';
+        }
+        else if (predchoziNoc) {
+            stav = 'odjezd';
+            popis = 'od 15:00 volno';
+        }
+        const titulek = `${cislo}. ${MESICE_GENITIV[mesic]} – ${popis}`;
+        bunky.push(`<td><span class="den ${stav}" title="${titulek}">${cislo}<span class="skryte"> ${MESICE_GENITIV[mesic]}, ${popis}</span></span></td>`);
+    }
+    while (bunky.length % 7 !== 0)
+        bunky.push('<td></td>');
+    const radky = [];
+    for (let i = 0; i < bunky.length; i += 7)
+        radky.push(`<tr>${bunky.slice(i, i + 7).join('')}</tr>`);
+    return `<table class="mesic">
+    <caption>${MESICE[mesic]} ${rok}</caption>
+    <thead><tr>${DNY.map((den) => `<th scope="col">${den}</th>`).join('')}</tr></thead>
+    <tbody>${radky.join('')}</tbody>
+  </table>`;
+}
+/**
+ * Kalendář obsazenosti. Obsazené termíny se čtou z obsazenost.json, takže
+ * zapsat novou rezervaci znamená upravit jen ten soubor — bez buildu.
+ */
+async function kalendar() {
+    const misto = document.querySelector('.kalendar');
+    const mesice = misto?.querySelector('.kalendar-mesice');
+    const zprava = misto?.querySelector('.kalendar-zprava');
+    if (!misto || !mesice || !zprava)
+        return;
+    let pobyty;
+    try {
+        const odpoved = await fetch(misto.dataset.zdroj ?? '', { cache: 'no-cache' });
+        if (!odpoved.ok)
+            throw new Error(`HTTP ${odpoved.status}`);
+        const data = (await odpoved.json());
+        pobyty = Array.isArray(data.obsazeno) ? data.obsazeno : [];
+    }
+    catch {
+        zprava.textContent = 'Kalendář se teď nepodařilo načíst. Volný termín vám rádi ověříme e-mailem.';
+        return;
+    }
+    const noci = obsazeneNoci(pobyty);
+    const dnes = new Date();
+    const dnesKlic = klicDne(dnes);
+    const tabulky = [];
+    for (let i = 0; i < MESICU_DOPREDU; i++) {
+        const prvni = new Date(dnes.getFullYear(), dnes.getMonth() + i, 1);
+        tabulky.push(mesicKalendare(prvni.getFullYear(), prvni.getMonth(), noci, dnesKlic));
+    }
+    mesice.innerHTML = tabulky.join('');
+    zprava.hidden = true;
+    const sipky = Array.from(misto.querySelectorAll('.kalendar-sip'));
+    const plynule = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const krok = () => {
+        const sirka = mesice.querySelector('table')?.getBoundingClientRect().width ?? mesice.clientWidth;
+        return sirka + (parseFloat(getComputedStyle(mesice).columnGap) || 0);
+    };
+    const prekresliSipky = () => {
+        sipky.forEach((sipka) => {
+            const dopredu = sipka.dataset.smer === '1';
+            sipka.disabled = dopredu
+                ? mesice.scrollLeft + mesice.clientWidth >= mesice.scrollWidth - 2
+                : mesice.scrollLeft <= 2;
+        });
+    };
+    sipky.forEach((sipka) => {
+        sipka.addEventListener('click', () => {
+            mesice.scrollBy({ left: Number(sipka.dataset.smer) * krok(), behavior: plynule ? 'smooth' : 'auto' });
+        });
+    });
+    mesice.addEventListener('scroll', prekresliSipky, { passive: true });
+    window.addEventListener('resize', prekresliSipky);
+    prekresliSipky();
+}
+/** Tlačítko pro tisk domovního řádu. */
+function tisk() {
+    document.querySelectorAll('[data-tisk]').forEach((tlacitko) => {
+        tlacitko.addEventListener('click', () => window.print());
+    });
+}
+/**
+ * Poptávka pobytu otevře e-mailový program
  * s předvyplněnou zprávou. Zpráva se skládá z popisků polí, takže přidat
  * do formuláře další pole znamená jen doplnit ho v šabloně.
  */
@@ -189,7 +358,7 @@ function popisekPole(form, pole) {
 }
 /** Jemné naplouvání sekcí při scrollu. */
 function naplouvani() {
-    const prvky = document.querySelectorAll('.karta, .sekce h2, .sekce > .obal > p, .dvousloupec > *, .motivace-obsah > *, .polozka, .panel, .kroky li, .trojice article');
+    const prvky = document.querySelectorAll('.karta, .sekce h2, .sekce > .obal > p, .dvousloupec > *, .motivace-obsah > *, .polozka, .panel, .trojice article');
     prvky.forEach((prvek) => prvek.classList.add('prijde'));
     if (!('IntersectionObserver' in window)) {
         prvky.forEach((prvek) => prvek.classList.add('videt'));
@@ -241,7 +410,10 @@ hlavicka();
 menu();
 chybejiciFotky();
 heroStridani();
+slozky();
 galerie();
+void kalendar();
+tisk();
 formulare();
 naplouvani();
 rok();
