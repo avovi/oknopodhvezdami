@@ -19,10 +19,18 @@
         <p class="kalendar-zprava" role="status">Načítám kalendář…</p>
         <noscript><p>Kalendář potřebuje zapnutý JavaScript. Volný termín vám rádi ověříme e-mailem.</p></noscript>
         <div class="kalendar-mesice" tabindex="0" aria-label="Měsíce s obsazeností domu"></div>
+        <div class="kalendar-vyber" hidden>
+          <p class="kalendar-vyber-text" role="status" aria-live="polite">Vyberte v kalendáři den příjezdu a den odjezdu.</p>
+          <div class="kalendar-vyber-akce" hidden>
+            <a class="tlacitko" href="#poptavka" data-rezervovat>Rezervovat tento termín</a>
+            <button type="button" class="kalendar-zrusit">Zrušit výběr</button>
+          </div>
+        </div>
         <ul class="kalendar-legenda">
           <li><span class="den volno" aria-hidden="true"></span> volno</li>
           <li><span class="den obsazeno" aria-hidden="true"></span> obsazeno</li>
           <li><span class="den odjezd" aria-hidden="true"></span> střídání hostů — odjezd do 11:00, příjezd od 15:00</li>
+          <li><span class="den vybrany" aria-hidden="true"></span> váš výběr</li>
         </ul>
       </div>
     </div>

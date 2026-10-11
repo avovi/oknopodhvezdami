@@ -236,7 +236,12 @@ function mesicKalendare(rok, mesic, noci, dnes) {
             popis = 'od 15:00 volno';
         }
         const titulek = `${cislo}. ${MESICE_GENITIV[mesic]} – ${popis}`;
-        bunky.push(`<td><span class="den ${stav}" title="${titulek}">${cislo}<span class="skryte"> ${MESICE_GENITIV[mesic]}, ${popis}</span></span></td>`);
+        const obsah = `${cislo}<span class="skryte"> ${MESICE_GENITIV[mesic]}, ${popis}</span>`;
+        // Kliknout jde jen na dny, kdy se dá přijet nebo odjet.
+        const klikaci = stav === 'volno' || stav === 'odjezd' || stav === 'prijezd';
+        bunky.push(klikaci
+            ? `<td><button type="button" class="den ${stav}" data-den="${klic}" aria-pressed="false" title="${titulek}">${obsah}</button></td>`
+            : `<td><span class="den ${stav}" title="${titulek}">${obsah}</span></td>`);
     }
     while (bunky.length % 7 !== 0)
         bunky.push('<td></td>');
@@ -248,6 +253,130 @@ function mesicKalendare(rok, mesic, noci, dnes) {
     <thead><tr>${DNY.map((den) => `<th scope="col">${den}</th>`).join('')}</tr></thead>
     <tbody>${radky.join('')}</tbody>
   </table>`;
+}
+/** Nejkratší pobyt, který jde v kalendáři vybrat — mimo sezónu jsou to dvě noci. */
+const NEJKRATSI_POBYT = 2;
+function posunDen(klic, oDni) {
+    const den = new Date(`${klic}T12:00:00`);
+    den.setDate(den.getDate() + oDni);
+    return klicDne(den);
+}
+/** Počet nocí mezi příjezdem a odjezdem. Zaokrouhlení spolkne změnu času. */
+function nociMezi(prijezd, odjezd) {
+    const rozdil = new Date(`${odjezd}T12:00:00`).getTime() - new Date(`${prijezd}T12:00:00`).getTime();
+    return Math.round(rozdil / 86400000);
+}
+function datumSlovy(klic, sRokem = false) {
+    const [rok, mesic, den] = klic.split('-').map(Number);
+    return `${den}. ${MESICE_GENITIV[(mesic ?? 1) - 1]}${sRokem ? ` ${rok}` : ''}`;
+}
+const pocetNoci = (n) => `${n} ${n === 1 ? 'noc' : n < 5 ? 'noci' : 'nocí'}`;
+/**
+ * Výběr termínu přímo v kalendáři: klik na den příjezdu, pak na den odjezdu.
+ * Hotový výběr jde jedním tlačítkem přenést do poptávky.
+ */
+function vyberTerminu(misto, mesice, noci, plynule) {
+    const panel = misto.querySelector('.kalendar-vyber');
+    const text = panel?.querySelector('.kalendar-vyber-text');
+    const akce = panel?.querySelector('.kalendar-vyber-akce');
+    const dny = Array.from(mesice.querySelectorAll('button.den'));
+    if (!panel || !text || !akce || dny.length === 0)
+        return;
+    const vychoziText = text.textContent ?? '';
+    const posledniDen = dny[dny.length - 1]?.dataset.den ?? '';
+    let prijezd = null;
+    let odjezd = null;
+    /** Nejzazší den odjezdu pro zvolený příjezd — začíná v něm první obsazená noc. */
+    let hranice = null;
+    const najdiHranici = (od) => {
+        let den = od;
+        while (den <= posledniDen && !noci.has(den))
+            den = posunDen(den, 1);
+        return den;
+    };
+    const prekresli = (nahled) => {
+        const konec = odjezd ?? nahled ?? null;
+        dny.forEach((tlacitko) => {
+            const den = tlacitko.dataset.den ?? '';
+            const vybrany = den === prijezd || den === odjezd;
+            tlacitko.classList.toggle('vybrany', vybrany);
+            tlacitko.classList.toggle('v-rozsahu', !!prijezd && !!konec && den > prijezd && den < konec);
+            tlacitko.classList.toggle('mimo-dosah', !odjezd && !!hranice && den > hranice);
+            tlacitko.setAttribute('aria-pressed', String(vybrany));
+        });
+    };
+    const napis = (zprava, hotovo = false) => {
+        text.textContent = zprava;
+        akce.hidden = !hotovo;
+    };
+    const zacni = (den) => {
+        prijezd = den;
+        odjezd = null;
+        hranice = najdiHranici(den);
+        prekresli();
+        napis(`Příjezd ${datumSlovy(den)}. Teď vyberte den odjezdu.`);
+    };
+    dny.forEach((tlacitko) => {
+        tlacitko.addEventListener('click', () => {
+            const den = tlacitko.dataset.den ?? '';
+            if (prijezd && !odjezd && hranice && den > prijezd && den <= hranice) {
+                const pocet = nociMezi(prijezd, den);
+                if (pocet < NEJKRATSI_POBYT) {
+                    napis(`Nejkratší pobyt jsou ${pocetNoci(NEJKRATSI_POBYT)}. Vyberte pozdější den odjezdu.`);
+                    return;
+                }
+                odjezd = den;
+                hranice = null;
+                prekresli();
+                const stejnyRok = prijezd.slice(0, 4) === odjezd.slice(0, 4);
+                napis(`${datumSlovy(prijezd, !stejnyRok)} – ${datumSlovy(odjezd, true)} · ${pocetNoci(pocet)}`, true);
+                return;
+            }
+            // Jinak začíná nový výběr — v den, kdy začíná obsazená noc, se ale přijet nedá.
+            if (noci.has(den)) {
+                prijezd = null;
+                odjezd = null;
+                hranice = null;
+                prekresli();
+                napis('V tento den přijíždějí jiní hosté. Vyberte jiný den příjezdu.');
+                return;
+            }
+            zacni(den);
+        });
+    });
+    mesice.addEventListener('mouseover', (e) => {
+        if (!prijezd || odjezd || !hranice)
+            return;
+        const den = e.target.closest('button.den')?.dataset.den;
+        prekresli(den && den > prijezd && den <= hranice ? den : undefined);
+    });
+    mesice.addEventListener('mouseleave', () => {
+        if (prijezd && !odjezd)
+            prekresli();
+    });
+    akce.querySelector('.kalendar-zrusit')?.addEventListener('click', () => {
+        prijezd = null;
+        odjezd = null;
+        hranice = null;
+        prekresli();
+        napis(vychoziText);
+    });
+    akce.querySelector('[data-rezervovat]')?.addEventListener('click', (e) => {
+        const formular = document.querySelector('#formular');
+        if (!formular || !prijezd || !odjezd)
+            return;
+        e.preventDefault();
+        const pole = (id) => formular.querySelector(`#${id}`);
+        const poleOd = pole('prijezd');
+        const poleDo = pole('odjezd');
+        if (poleOd)
+            poleOd.value = prijezd;
+        if (poleDo)
+            poleDo.value = odjezd;
+        document.querySelector('#poptavka')?.scrollIntoView({ behavior: plynule ? 'smooth' : 'auto' });
+        pole('jmeno')?.focus({ preventScroll: true });
+    });
+    panel.hidden = false;
 }
 /**
  * Kalendář obsazenosti. Obsazené termíny se čtou z obsazenost.json, takže
@@ -303,6 +432,7 @@ async function kalendar() {
     mesice.addEventListener('scroll', prekresliSipky, { passive: true });
     window.addEventListener('resize', prekresliSipky);
     prekresliSipky();
+    vyberTerminu(misto, mesice, noci, plynule);
 }
 /** Malými písmeny a bez diakritiky — „Kouření" najde i „koureni". */
 function bezDiakritiky(text) {

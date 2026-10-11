@@ -765,6 +765,34 @@ code {
 .den.odjezd { background: linear-gradient(to bottom right, var(--cihla) 50%, var(--volno) 50%); }
 .den.minulost { background: none; color: rgba(0, 0, 0, 0.28); }
 
+/* dny, na které jde kliknout a vybrat termín */
+button.den {
+  width: 100%; border: 0; padding: 0; margin: 0;
+  font-family: inherit; color: inherit; cursor: pointer;
+  transition: box-shadow 0.15s ease, opacity 0.2s ease;
+}
+button.den:hover { box-shadow: inset 0 0 0 2px var(--salvej-tmava); }
+button.den:focus-visible { outline: 2px solid var(--cerna); outline-offset: 1px; }
+.den.v-rozsahu { background: rgba(124, 135, 111, 0.55); }
+.den.vybrany { background: #4F5A45; color: var(--bila); }
+.den.mimo-dosah { opacity: 0.35; }
+
+.kalendar-vyber {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: 1.4rem; padding: 1rem 1.4rem;
+  background: var(--bezova-svetla);
+}
+.kalendar-vyber[hidden], .kalendar-vyber-akce[hidden] { display: none; }
+.kalendar-vyber-text { margin: 0; }
+.kalendar-vyber-akce { display: flex; align-items: center; flex-wrap: wrap; gap: 0.8rem 1.4rem; }
+.kalendar-zrusit {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: inherit; font-size: 0.85rem; color: var(--text-tlumeny);
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.kalendar-zrusit:hover { color: var(--cerna); }
+
 .kalendar-zprava { color: var(--text-tlumeny); margin: 1rem 0; }
 .kalendar-zprava[hidden] { display: none; }
 
