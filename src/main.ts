@@ -320,6 +320,168 @@ async function kalendar(): Promise<void> {
   prekresliSipky();
 }
 
+/** Malými písmeny a bez diakritiky — „Kouření" najde i „koureni". */
+function bezDiakritiky(text: string): string {
+  return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+}
+
+/**
+ * Slova, která hosté hledají jinak, než jak stojí v řádu. „pes" v textu
+ * nikde není — je tam „pejsci", „psy" a „psech".
+ */
+const PRIBUZNA_SLOVA: Record<string, string[]> = {
+  pes: ['pejs', 'psy', 'psech', 'psi'],
+  psi: ['pejs', 'psy', 'psech'],
+  pejsek: ['pejs', 'psy', 'psech'],
+  topeni: ['vytapeni', 'teplot'],
+  vetrani: ['vetrat', 'ventilac', 'rekuperac'],
+  hluk: ['hlasit', 'nocni klid'],
+  cigarety: ['kour', 'nedopal'],
+  odjezd: ['odchod', 'check-out'],
+};
+
+/** Hledaný výraz i s příbuznými slovy, všechno bez diakritiky. */
+function hledaneVzory(dotaz: string): string[] {
+  const vzory = new Set([dotaz]);
+  if (dotaz.length >= 3) {
+    Object.entries(PRIBUZNA_SLOVA).forEach(([slovo, pribuzna]) => {
+      if (slovo.startsWith(dotaz)) pribuzna.forEach((vzor) => vzory.add(vzor));
+    });
+  }
+  return [...vzory];
+}
+
+/**
+ * Obalí výskyty vzorů v textovém uzlu značkou <mark>. Porovnává se text
+ * bez diakritiky a se sloučenými mezerami; mapa vrací pozice v původním textu.
+ */
+function zvyrazniUzel(uzel: Text, vzory: string[]): void {
+  const puvodni = uzel.data;
+  let upraveny = '';
+  const mapa: number[] = [];
+  let bylaMezera = false;
+
+  for (let i = 0; i < puvodni.length; i++) {
+    const znak = puvodni.charAt(i);
+    if (/\s/.test(znak)) {
+      if (!bylaMezera) {
+        upraveny += ' ';
+        mapa.push(i);
+      }
+      bylaMezera = true;
+      continue;
+    }
+    bylaMezera = false;
+    for (const pismeno of bezDiakritiky(znak)) {
+      upraveny += pismeno;
+      mapa.push(i);
+    }
+  }
+
+  const useky: Array<[number, number]> = [];
+  let od = 0;
+  while (od < upraveny.length) {
+    let nejblizsi = -1;
+    let delka = 0;
+    vzory.forEach((vzor) => {
+      const pozice = upraveny.indexOf(vzor, od);
+      if (pozice >= 0 && (nejblizsi < 0 || pozice < nejblizsi)) {
+        nejblizsi = pozice;
+        delka = vzor.length;
+      }
+    });
+    if (nejblizsi < 0) break;
+    const zacatek = mapa[nejblizsi] ?? 0;
+    const konec = (mapa[nejblizsi + delka - 1] ?? zacatek) + 1;
+    useky.push([zacatek, konec]);
+    od = nejblizsi + delka;
+  }
+  if (useky.length === 0) return;
+
+  const fragment = document.createDocumentFragment();
+  let posledni = 0;
+  useky.forEach(([zacatek, konec]) => {
+    if (zacatek > posledni) fragment.append(puvodni.slice(posledni, zacatek));
+    const znacka = document.createElement('mark');
+    znacka.textContent = puvodni.slice(zacatek, konec);
+    fragment.append(znacka);
+    posledni = konec;
+  });
+  if (posledni < puvodni.length) fragment.append(puvodni.slice(posledni));
+  uzel.replaceWith(fragment);
+}
+
+/**
+ * Hledání v domovním řádu. Nechá jen body, ve kterých se hledané slovo
+ * vyskytuje, a zvýrazní ho. Bez skriptu pole vůbec není vidět.
+ */
+function hledaniVRadu(): void {
+  const hledani = document.querySelector<HTMLElement>('.hledani');
+  const pole = hledani?.querySelector<HTMLInputElement>('input');
+  const vysledek = hledani?.querySelector<HTMLElement>('.hledani-vysledek');
+  const dokument = hledani?.closest<HTMLElement>('.dokument');
+  if (!hledani || !pole || !vysledek || !dokument) return;
+
+  const body = Array.from(dokument.querySelectorAll<HTMLElement>('.bod')).map((bod) => ({
+    bod,
+    html: bod.innerHTML,
+    text: bezDiakritiky(bod.textContent ?? '').replace(/\s+/g, ' '),
+  }));
+  const nic = dokument.querySelector<HTMLElement>('.hledani-nic');
+  const konec = dokument.querySelector<HTMLElement>('.dokument-konec');
+
+  const najdi = (): void => {
+    const dotaz = bezDiakritiky(pole.value).replace(/\s+/g, ' ').trim();
+    const hleda = dotaz.length >= 2;
+    const vzory = hleda ? hledaneVzory(dotaz) : [];
+    let nalezeno = 0;
+
+    body.forEach(({ bod, html, text }) => {
+      bod.innerHTML = html;
+      const sedi = !hleda || vzory.some((vzor) => text.includes(vzor));
+      bod.hidden = !sedi;
+      if (!hleda || !sedi) return;
+      nalezeno++;
+
+      const pruchod = document.createTreeWalker(bod, NodeFilter.SHOW_TEXT);
+      const uzly: Text[] = [];
+      while (pruchod.nextNode()) uzly.push(pruchod.currentNode as Text);
+      uzly.forEach((uzel) => zvyrazniUzel(uzel, vzory));
+    });
+
+    if (nic) nic.hidden = !hleda || nalezeno > 0;
+    if (konec) konec.hidden = hleda;
+    vysledek.textContent = hleda && nalezeno > 0 ? `Odpovídá ${nalezeno} z ${body.length} bodů` : '';
+
+    // Pole se při scrollování drží nahoře — výsledky ať začínají hned pod ním.
+    const odsazeni = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    const zacatek = dokument.getBoundingClientRect().top + window.scrollY - odsazeni;
+    if (window.scrollY > zacatek) window.scrollTo({ top: zacatek });
+  };
+
+  pole.addEventListener('input', najdi);
+  pole.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    pole.value = '';
+    najdi();
+  });
+  hledani.querySelectorAll<HTMLButtonElement>('[data-hledat]').forEach((tip) => {
+    tip.addEventListener('click', () => {
+      pole.value = tip.dataset.hledat ?? '';
+      najdi();
+      pole.focus();
+    });
+  });
+  // Tisknout se má celý řád, ne jen to, co zrovna zbylo po hledání.
+  window.addEventListener('beforeprint', () => {
+    if (!pole.value) return;
+    pole.value = '';
+    najdi();
+  });
+
+  hledani.hidden = false;
+}
+
 /** Tlačítko pro tisk domovního řádu. */
 function tisk(): void {
   document.querySelectorAll('[data-tisk]').forEach((tlacitko) => {
@@ -450,6 +612,7 @@ slozky();
 galerie();
 void kalendar();
 tisk();
+hledaniVRadu();
 formulare();
 naplouvani();
 rok();

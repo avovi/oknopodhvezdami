@@ -831,6 +831,53 @@ code {
 }
 .dokumenty a:hover { color: var(--cihla-tmava); border-color: var(--cihla-tmava); }
 
+/* ---------- domovní řád: hledání ---------- */
+
+.hledani {
+  position: sticky; top: 64px; z-index: 5;
+  background: var(--bila);
+  padding: 1rem 0 0.8rem;
+  margin: -1rem 0 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+.hledani[hidden] { display: none; }
+.hledani input {
+  width: 100%;
+  font-family: var(--text-font); font-size: 1rem; font-weight: 300;
+  padding: 0.85rem 1rem 0.85rem 2.8rem;
+  border: 1px solid rgba(0, 0, 0, 0.2); border-radius: 0;
+  background: var(--bila) no-repeat 1rem center / 1.1rem
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23A8584D' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-4-4'/%3E%3C/svg%3E");
+  color: var(--cerna);
+}
+.hledani input:focus { outline: 2px solid var(--cihla); outline-offset: 1px; }
+.hledani-tipy {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.5rem;
+  margin: 0.8rem 0 0; font-size: 0.8rem; color: var(--text-tlumeny);
+}
+.hledani-tipy button {
+  font-family: var(--text-font); font-size: 0.78rem; font-weight: 400;
+  padding: 0.3rem 0.75rem; cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.15); background: var(--bezova-svetla); color: var(--cerna);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.hledani-tipy button:hover, .hledani-tipy button:focus-visible { border-color: var(--cihla); color: var(--cihla-tmava); }
+.hledani-vysledek { margin: 0.5rem 0 0; font-size: 0.8rem; color: var(--text-tlumeny); }
+.hledani-vysledek:empty { display: none; }
+
+.bod[hidden], .hledani-nic[hidden], .dokument-konec[hidden] { display: none; }
+/* mezery nese bod, ne nadpis — skryté body po hledání tak nenechají díry */
+.dokument .bod h2 { margin-top: 0; }
+.bod { margin-top: 2.4rem; }
+.hledani + .bod { margin-top: 0; }
+.hledani-nic { color: var(--text-tlumeny); }
+.hledani-nic a { color: var(--cihla-tmava); }
+
+.dokument mark {
+  background: rgba(168, 88, 77, 0.2); color: inherit;
+  padding: 0 0.08em; border-radius: 2px;
+}
+
 @media (max-width: 960px) {
   .dvousloupec-dlouhy .sloupec-foto { position: static; }
   .galerie-slozka { grid-template-columns: repeat(2, 1fr); }
@@ -840,6 +887,12 @@ code {
 }
 
 @media (max-width: 560px) {
+  .hledani-tipy {
+    flex-wrap: nowrap; overflow-x: auto; white-space: nowrap;
+    scrollbar-width: none; margin-right: -1rem; padding-right: 1rem;
+  }
+  .hledani-tipy::-webkit-scrollbar { display: none; }
+  .hledani-tipy button { flex: 0 0 auto; }
   .kalendar-mesice { --mesicu: 1; }
   .odrazky-dvousloupec { columns: 1; }
 }
@@ -847,7 +900,7 @@ code {
 /* ---------- tisk — hlavně domovní řád ---------- */
 
 @media print {
-  .hlavicka, .paticka, .vyzva, .preskocit, .lupa { display: none !important; }
+  .hlavicka, .paticka, .vyzva, .preskocit, .lupa, .hledani { display: none !important; }
   body { font-size: 11pt; line-height: 1.5; }
   body.podstranka { padding-top: 0; }
   .hlava-stranky { background: none; border: 0; padding: 0 0 1rem; }
